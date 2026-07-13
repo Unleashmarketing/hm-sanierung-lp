@@ -49,7 +49,7 @@ button{font-family:inherit; cursor:pointer; border:none; background:none; color:
 
 /* ============ TYPE ============ */
 h1,h2,h3,h4{font-family:var(--display); font-weight:600; color:var(--ink); letter-spacing:-0.025em; line-height:0.98}
-h1{font-size:clamp(3rem, 8.5vw, 7.5rem); font-weight:500; letter-spacing:-0.035em}
+h1{font-size:clamp(2.4rem, 6vw, 5.5rem); font-weight:500; letter-spacing:-0.035em}
 h2{font-size:clamp(2.2rem, 5.5vw, 4.5rem); font-weight:500; line-height:1}
 h3{font-size:clamp(1.3rem, 2.2vw, 1.75rem); font-weight:500; line-height:1.1}
 h4{font-size:1.1rem; font-weight:600; line-height:1.2}
@@ -72,7 +72,7 @@ section{padding:100px 0; position:relative}
 @media(max-width:880px){section{padding:72px 0}}
 section.tight{padding:64px 0}
 
-/* ============ TICKER (Top edge — fixed) ============ */
+/* ============ TICKER ============ */
 .top-ticker{
   position:fixed;
   top:0; left:0; right:0;
@@ -91,12 +91,12 @@ section.tight{padding:64px 0}
 .ticker-item::after{content:"•"; margin-left:48px; color:var(--accent)}
 .ticker-item span{color:var(--accent); font-weight:600}
 
-/* ============ NAV (sits below ticker) ============ */
+/* ============ NAV ============ */
 .nav{
   position:fixed;
   top:var(--ticker-h); left:0; right:0;
   z-index:50;
-  padding:18px 0;
+  padding:14px 0;
   transition:background 0.3s, padding 0.3s, border-color 0.3s;
   border-bottom:1px solid transparent;
 }
@@ -104,7 +104,7 @@ section.tight{padding:64px 0}
   background:rgba(250,250,247,0.85);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
-  padding:12px 0;
+  padding:10px 0;
   border-bottom-color:var(--line);
 }
 .nav-inner{
@@ -126,18 +126,9 @@ section.tight{padding:64px 0}
   letter-spacing:-0.03em;
   color:var(--ink);
 }
-.logo-mark{
-  width:34px; height:34px;
-  background:var(--ink);
-  color:#fff;
-  border-radius:50%;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-family:var(--sans);
-  font-size:0.78rem;
-  font-weight:800;
-  letter-spacing:-0.02em;
+.logo-img{
+  height:38px;
+  width:auto;
 }
 .nav-links{display:flex; gap:34px; font-size:0.92rem; font-weight:500}
 .nav-links a{color:var(--ink); position:relative; padding:4px 0}
@@ -189,11 +180,14 @@ section.tight{padding:64px 0}
 .btn:hover svg{transform:translateX(4px)}
 .btn-block{width:100%; justify-content:center}
 
-/* ============ HERO ============ */
+/* ============ HERO — viewport-fit ============ */
 .hero{
-  /* account for fixed ticker + nav */
-  padding-top:calc(var(--ticker-h) + 100px);
-  padding-bottom:60px;
+  height:calc(100vh - var(--ticker-h));
+  min-height:520px;
+  max-height:800px;
+  padding-top:80px;
+  display:flex;
+  align-items:center;
   position:relative;
   overflow:hidden;
   background:var(--paper);
@@ -203,30 +197,30 @@ section.tight{padding:64px 0}
   margin:0 auto;
   padding:0 var(--gutter);
   display:grid;
-  grid-template-columns:1.1fr 1fr;
-  gap:48px;
+  grid-template-columns:1.15fr 1fr;
+  gap:40px;
   align-items:center;
+  width:100%;
   position:relative;
   z-index:2;
 }
 @media(max-width:980px){
-  .hero-grid{grid-template-columns:1fr; gap:32px}
+  .hero{height:auto; min-height:0; max-height:none; padding:100px 0 48px}
+  .hero-grid{grid-template-columns:1fr; gap:28px}
 }
 .hero-eyebrow{
   display:inline-flex; align-items:center; gap:10px;
-  margin-bottom:28px;
+  margin-bottom:20px;
 }
 .hero-eyebrow .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1; transform:scale(1)}50%{opacity:0.5; transform:scale(0.7)}}
 .hero-eyebrow span{font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:500; color:var(--muted)}
-.hero h1{
-  margin-bottom:36px;
-}
+.hero h1{margin-bottom:24px}
 .hero h1 em{font-style:italic; font-weight:300; color:var(--ink)}
 .hero h1 .accent{color:var(--accent); font-weight:600}
-.hero-lede{font-size:1.1rem; color:var(--muted); line-height:1.55; max-width:52ch; margin-bottom:32px}
+.hero-lede{font-size:1.05rem; color:var(--muted); line-height:1.55; max-width:52ch; margin-bottom:24px}
 .hero-lede strong{color:var(--ink); font-weight:600}
-.hero-actions{display:flex; gap:16px; flex-wrap:wrap; align-items:center}
+.hero-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
 .hero-link{
   font-size:0.95rem; font-weight:600;
   display:inline-flex; align-items:center; gap:8px;
@@ -237,22 +231,18 @@ section.tight{padding:64px 0}
 }
 .hero-link:hover{color:var(--accent); border-color:var(--accent)}
 
-/* Hero image — now in grid column 2 */
 .hero-visual{
   position:relative;
   aspect-ratio:4/5;
-  max-height:640px;
-  border-radius:20px;
+  max-height:520px;
+  border-radius:18px;
   overflow:hidden;
   background:#222;
 }
 @media(max-width:980px){
-  .hero-visual{aspect-ratio:16/10; max-height:480px}
+  .hero-visual{aspect-ratio:16/10; max-height:380px}
 }
-.hero-visual img{
-  width:100%; height:100%; object-fit:cover;
-  transition:transform 8s ease-out;
-}
+.hero-visual img{width:100%; height:100%; object-fit:cover}
 .hero-visual::after{
   content:"";
   position:absolute; inset:0;
@@ -261,28 +251,26 @@ section.tight{padding:64px 0}
 }
 .hero-visual-caption{
   position:absolute;
-  bottom:24px; left:24px; right:24px;
+  bottom:20px; left:20px; right:20px;
   display:flex;
   justify-content:space-between;
   align-items:end;
-  gap:16px;
+  gap:12px;
   z-index:2;
   color:#fff;
 }
-.hero-visual-caption .vc-loc{font-family:var(--display); font-style:italic; font-size:1.3rem; font-weight:400; line-height:1.1}
-.hero-visual-caption .vc-loc-sub{font-size:0.8rem; opacity:0.8; margin-top:4px}
+.hero-visual-caption .vc-loc{font-family:var(--display); font-style:italic; font-size:1.15rem; font-weight:400; line-height:1.1}
+.hero-visual-caption .vc-loc-sub{font-size:0.75rem; opacity:0.8; margin-top:3px}
 .hero-visual-caption .vc-tag{
   background:rgba(255,255,255,0.16);
   backdrop-filter:blur(10px);
-  padding:7px 14px;
+  padding:6px 12px;
   border-radius:999px;
-  font-size:0.72rem;
+  font-size:0.7rem;
   font-weight:500;
   letter-spacing:0.06em;
   text-transform:uppercase;
 }
-
-/* Hero deco numbers — hidden, replaced by 2-col layout */
 .hero-num{display:none}
 
 /* ============ STATS ============ */
@@ -296,10 +284,11 @@ section.tight{padding:64px 0}
   margin:0 auto;
   padding:0 var(--gutter);
   display:grid;
-  grid-template-columns:repeat(4, 1fr);
+  grid-template-columns:repeat(3, 1fr);
   gap:40px;
 }
-@media(max-width:880px){.stats-inner{grid-template-columns:repeat(2, 1fr); gap:40px 24px}}
+@media(max-width:880px){.stats-inner{grid-template-columns:repeat(3, 1fr); gap:24px}}
+@media(max-width:540px){.stats-inner{grid-template-columns:1fr; gap:28px; text-align:center}}
 .stat .num{
   font-family:var(--display);
   font-size:clamp(2.8rem, 5vw, 4.2rem);
@@ -327,15 +316,11 @@ section.tight{padding:64px 0}
   font-size:0.92rem;
   color:var(--muted);
   font-weight:400;
-  letter-spacing:0;
 }
 .section-head .index strong{color:var(--accent); font-style:normal; font-weight:600; font-family:var(--sans); letter-spacing:0.06em; font-size:0.82rem; margin-right:6px}
 .section-head h2{max-width:18ch}
 .section-head h2 em{font-style:italic; color:var(--accent); font-weight:400}
-.section-head .desc{
-  font-size:1.02rem; color:var(--muted); line-height:1.55; max-width:46ch;
-  margin-top:16px;
-}
+.section-head .desc{font-size:1.02rem; color:var(--muted); line-height:1.55; max-width:46ch; margin-top:16px}
 
 /* ============ SERVICES ============ */
 .services-list{display:flex; flex-direction:column; gap:0}
@@ -350,52 +335,51 @@ section.tight{padding:64px 0}
 .svc:last-child{border-bottom:1px solid var(--line)}
 @media(max-width:880px){.svc{grid-template-columns:1fr; gap:28px; padding:40px 0}}
 .svc-meta{display:flex; flex-direction:column; gap:20px}
-.svc-no{
-  font-family:var(--display);
-  font-size:0.95rem;
-  font-style:italic;
-  color:var(--muted);
-  font-weight:400;
-}
+.svc-no{font-family:var(--display); font-size:0.95rem; font-style:italic; color:var(--muted); font-weight:400}
 .svc-no strong{color:var(--accent); font-style:normal; font-family:var(--sans); font-weight:600}
-.svc h3{
-  font-size:clamp(2rem, 4.5vw, 3.4rem);
-  font-weight:400;
-  letter-spacing:-0.03em;
-  line-height:0.98;
-}
+.svc h3{font-size:clamp(2rem, 4.5vw, 3.4rem); font-weight:400; letter-spacing:-0.03em; line-height:0.98}
 .svc h3 em{font-style:italic; font-weight:300}
 .svc-desc{font-size:1rem; color:var(--muted); line-height:1.6; max-width:42ch}
-.svc-bottom{
-  display:flex; justify-content:space-between; align-items:end; gap:24px;
-  margin-top:12px;
-}
+.svc-bottom{display:flex; justify-content:space-between; align-items:end; gap:24px; margin-top:12px}
 .svc-price{font-size:0.82rem; color:var(--muted); letter-spacing:0.04em; text-transform:uppercase; font-weight:500}
 .svc-price strong{display:block; font-family:var(--display); font-size:1.55rem; color:var(--ink); margin-top:6px; font-weight:500; letter-spacing:-0.02em; text-transform:none}
-.svc-link{
-  font-size:0.92rem; font-weight:600;
-  display:inline-flex; align-items:center; gap:8px;
-  color:var(--ink);
-  white-space:nowrap;
-}
+.svc-link{font-size:0.92rem; font-weight:600; display:inline-flex; align-items:center; gap:8px; color:var(--ink); white-space:nowrap}
 .svc-link svg{width:14px; height:14px; transition:transform 0.2s}
 .svc:hover .svc-link svg{transform:translateX(6px)}
-.svc-img{
-  aspect-ratio:5/4;
-  border-radius:16px;
-  overflow:hidden;
-  background:var(--line-soft);
-  position:relative;
-}
-.svc-img img{
-  width:100%; height:100%; object-fit:cover;
-  transition:transform 0.8s cubic-bezier(.16,1,.3,1);
-}
+.svc-img{aspect-ratio:5/4; border-radius:16px; overflow:hidden; background:var(--line-soft); position:relative}
+.svc-img img{width:100%; height:100%; object-fit:cover; transition:transform 0.8s cubic-bezier(.16,1,.3,1)}
 .svc:hover .svc-img img{transform:scale(1.04)}
 .svc.alt{grid-template-columns:1.2fr 1fr}
 @media(max-width:880px){.svc.alt{grid-template-columns:1fr}}
 .svc.alt .svc-img{order:-1}
 @media(max-width:880px){.svc.alt .svc-img{order:0}}
+
+/* ============ INLINE CTA BANNER ============ */
+.inline-cta{
+  background:var(--accent);
+  padding:48px 0;
+  text-align:center;
+}
+.inline-cta-inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 var(--gutter);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:32px;
+  flex-wrap:wrap;
+}
+.inline-cta p{
+  font-family:var(--display);
+  font-size:clamp(1.3rem, 2.5vw, 1.9rem);
+  font-weight:500;
+  color:#fff;
+  letter-spacing:-0.02em;
+}
+.inline-cta p em{font-style:italic; font-weight:300}
+.inline-cta .btn{background:#fff; color:var(--ink)}
+.inline-cta .btn:hover{background:var(--ink); color:#fff}
 
 /* ============ USP ============ */
 .usp-grid{
@@ -415,70 +399,26 @@ section.tight{padding:64px 0}
 }
 .usp-item:nth-child(odd){padding-right:40px; border-right:1px solid var(--line)}
 @media(max-width:880px){.usp-item:nth-child(odd){border-right:none; padding-right:0}}
-.usp-item .uno{
-  font-family:var(--display);
-  font-style:italic;
-  font-size:1.05rem;
-  color:var(--accent);
-  font-weight:400;
-  line-height:1.2;
-  min-width:32px;
-  padding-top:4px;
-}
-.usp-item h4{
-  font-family:var(--display);
-  font-size:clamp(1.2rem, 1.8vw, 1.45rem);
-  font-weight:500;
-  letter-spacing:-0.02em;
-  line-height:1.15;
-  margin-bottom:8px;
-  color:var(--ink);
-}
+.usp-item .uno{font-family:var(--display); font-style:italic; font-size:1.05rem; color:var(--accent); font-weight:400; line-height:1.2; min-width:32px; padding-top:4px}
+.usp-item h4{font-family:var(--display); font-size:clamp(1.2rem, 1.8vw, 1.45rem); font-weight:500; letter-spacing:-0.02em; line-height:1.15; margin-bottom:8px; color:var(--ink)}
 .usp-item p{font-size:0.94rem; color:var(--muted); line-height:1.55; margin:0; max-width:46ch}
 
 /* ============ CALCULATOR ============ */
 .calc-section{background:var(--paper-2); padding:100px 0}
 @media(max-width:720px){.calc-section{padding:72px 0}}
-.calc-wrap{
-  display:grid;
-  grid-template-columns:1fr 1.1fr;
-  gap:56px;
-  align-items:start;
-}
+.calc-wrap{display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:start}
 @media(max-width:880px){.calc-wrap{grid-template-columns:1fr; gap:40px}}
 .calc-intro h2{margin-bottom:18px}
 .calc-intro h2 em{font-style:italic; color:var(--accent); font-weight:400}
 .calc-intro p{font-size:1.02rem; color:var(--muted); max-width:42ch; line-height:1.6; margin-bottom:14px}
-.calc-intro .hint{
-  font-size:0.88rem; color:var(--muted); padding:16px 18px;
-  background:rgba(0,0,0,0.04); border-radius:12px; margin-top:20px;
-}
+.calc-intro .hint{font-size:0.88rem; color:var(--muted); padding:16px 18px; background:rgba(0,0,0,0.04); border-radius:12px; margin-top:20px}
 .calc-intro .hint strong{color:var(--ink); font-weight:600}
-.calc-card{
-  background:#fff;
-  border-radius:18px;
-  padding:36px;
-  border:1px solid var(--line);
-}
+.calc-card{background:#fff; border-radius:18px; padding:36px; border:1px solid var(--line)}
 @media(max-width:720px){.calc-card{padding:24px}}
-.calc-card .clbl{
-  display:block;
-  font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
-  font-weight:600; color:var(--muted); margin-bottom:12px;
-}
+.calc-card .clbl{display:block; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; color:var(--muted); margin-bottom:12px}
 .calc-types{display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:24px}
 @media(max-width:540px){.calc-types{grid-template-columns:repeat(2, 1fr)}}
-.calc-type{
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  padding:14px 8px;
-  border:1.5px solid var(--line);
-  border-radius:10px;
-  cursor:pointer;
-  background:#fff;
-  transition:border-color 0.15s, background 0.15s;
-  position:relative;
-  text-align:center;
-}
+.calc-type{display:flex; flex-direction:column; align-items:center; gap:8px; padding:14px 8px; border:1.5px solid var(--line); border-radius:10px; cursor:pointer; background:#fff; transition:border-color 0.15s, background 0.15s; position:relative; text-align:center}
 .calc-type input{position:absolute; opacity:0; pointer-events:none}
 .calc-type:hover{border-color:var(--ink)}
 .calc-type.active{border-color:var(--accent); background:var(--accent-soft)}
@@ -486,45 +426,20 @@ section.tight{padding:64px 0}
 .calc-type.active svg{stroke:var(--accent)}
 .calc-type span{font-size:0.84rem; font-weight:600; color:var(--ink)}
 .calc-slider-wrap{margin-bottom:20px}
-.calc-slider-wrap label{
-  display:flex; justify-content:space-between; align-items:baseline;
-  font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
-  font-weight:600; color:var(--muted); margin-bottom:10px;
-}
-.calc-slider-wrap label .val{
-  font-family:var(--display); font-size:1.4rem; font-weight:500;
-  color:var(--accent); letter-spacing:-0.02em; text-transform:none;
-}
+.calc-slider-wrap label{display:flex; justify-content:space-between; align-items:baseline; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; color:var(--muted); margin-bottom:10px}
+.calc-slider-wrap label .val{font-family:var(--display); font-size:1.4rem; font-weight:500; color:var(--accent); letter-spacing:-0.02em; text-transform:none}
 .calc-slider-wrap input[type=range]{width:100%; accent-color:var(--accent); cursor:pointer}
-.calc-result{
-  background:var(--ink);
-  color:#fff;
-  border-radius:14px;
-  padding:24px;
-  text-align:center;
-  margin-bottom:16px;
-}
+.calc-result{background:var(--ink); color:#fff; border-radius:14px; padding:24px; text-align:center; margin-bottom:16px}
 .calc-result .l{font-size:0.74rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,0.55); margin-bottom:8px}
 .calc-result .r{font-family:var(--display); font-size:clamp(1.6rem, 3vw, 2.3rem); font-weight:500; letter-spacing:-0.025em; line-height:1.1}
 .calc-result .r .sep{color:var(--accent); margin:0 4px}
 .calc-result .d{font-size:0.78rem; color:rgba(255,255,255,0.55); margin-top:8px}
 
 /* ============ PROJECTS GALLERY ============ */
-.proj-grid{
-  display:grid;
-  grid-template-columns:repeat(6, 1fr);
-  gap:20px;
-}
+.proj-grid{display:grid; grid-template-columns:repeat(6, 1fr); gap:20px}
 @media(max-width:980px){.proj-grid{grid-template-columns:repeat(2, 1fr)}}
 @media(max-width:540px){.proj-grid{grid-template-columns:1fr}}
-.proj-card{
-  position:relative;
-  border-radius:14px;
-  overflow:hidden;
-  cursor:pointer;
-  background:var(--line);
-  transition:transform 0.4s cubic-bezier(.16,1,.3,1);
-}
+.proj-card{position:relative; border-radius:14px; overflow:hidden; cursor:pointer; background:var(--line); transition:transform 0.4s cubic-bezier(.16,1,.3,1)}
 .proj-card:hover{transform:translateY(-4px)}
 .proj-card.lg{grid-column:span 4; aspect-ratio:16/10}
 .proj-card.md{grid-column:span 2; aspect-ratio:1}
@@ -534,119 +449,31 @@ section.tight{padding:64px 0}
 @media(max-width:540px){.proj-card.lg,.proj-card.md,.proj-card.tall,.proj-card.wide{grid-column:span 1}}
 .proj-card img{width:100%; height:100%; object-fit:cover; transition:transform 0.8s cubic-bezier(.16,1,.3,1)}
 .proj-card:hover img{transform:scale(1.05)}
-.proj-card .pmeta{
-  position:absolute;
-  bottom:0; left:0; right:0;
-  padding:20px;
-  background:linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.7) 100%);
-  color:#fff;
-}
-.proj-card .ptag{
-  display:inline-block;
-  font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;
-  font-weight:600; background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(8px);
-  padding:5px 11px; border-radius:999px; margin-bottom:8px;
-}
-.proj-card .pname{
-  font-family:var(--display);
-  font-size:1.1rem;
-  font-weight:500;
-  font-style:italic;
-  letter-spacing:-0.01em;
-  line-height:1.15;
-}
+.proj-card .pmeta{position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.7) 100%); color:#fff}
+.proj-card .ptag{display:inline-block; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); padding:5px 11px; border-radius:999px; margin-bottom:8px}
+.proj-card .pname{font-family:var(--display); font-size:1.1rem; font-weight:500; font-style:italic; letter-spacing:-0.01em; line-height:1.15}
 .proj-card.lg .pname, .proj-card.wide .pname{font-size:1.35rem}
 
 /* ============ FAQ ============ */
-.faq-list{
-  display:flex;
-  flex-direction:column;
-  border-top:1px solid var(--line);
-}
+.faq-list{display:flex; flex-direction:column; border-top:1px solid var(--line)}
 .faq-item{border-bottom:1px solid var(--line)}
-.faq-item summary{
-  list-style:none;
-  cursor:pointer;
-  padding:24px 0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:24px;
-  font-family:var(--display);
-  font-size:clamp(1.15rem, 2.2vw, 1.45rem);
-  font-weight:500;
-  letter-spacing:-0.02em;
-  color:var(--ink);
-  transition:padding 0.2s;
-}
+.faq-item summary{list-style:none; cursor:pointer; padding:24px 0; display:flex; justify-content:space-between; align-items:center; gap:24px; font-family:var(--display); font-size:clamp(1.15rem, 2.2vw, 1.45rem); font-weight:500; letter-spacing:-0.02em; color:var(--ink); transition:padding 0.2s}
 .faq-item summary::-webkit-details-marker{display:none}
 .faq-item summary:hover{padding-left:12px}
-.faq-item summary::after{
-  content:"";
-  width:34px; height:34px;
-  border:1.5px solid var(--ink);
-  border-radius:50%;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='2' stroke-linecap='round'><path d='M12 5v14M5 12h14'/></svg>");
-  background-size:14px; background-repeat:no-repeat; background-position:center;
-  flex-shrink:0;
-  transition:transform 0.3s, background-color 0.2s, border-color 0.2s;
-}
-.faq-item[open] summary::after{
-  transform:rotate(45deg);
-  background-color:var(--accent);
-  border-color:var(--accent);
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'><path d='M12 5v14M5 12h14'/></svg>");
-}
-.faq-item .ans{
-  padding:0 60px 28px 0;
-  color:var(--muted);
-  font-size:1rem;
-  line-height:1.65;
-  max-width:74ch;
-}
+.faq-item summary::after{content:""; width:34px; height:34px; border:1.5px solid var(--ink); border-radius:50%; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='2' stroke-linecap='round'><path d='M12 5v14M5 12h14'/></svg>"); background-size:14px; background-repeat:no-repeat; background-position:center; flex-shrink:0; transition:transform 0.3s, background-color 0.2s, border-color 0.2s}
+.faq-item[open] summary::after{transform:rotate(45deg); background-color:var(--accent); border-color:var(--accent); background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'><path d='M12 5v14M5 12h14'/></svg>")}
+.faq-item .ans{padding:0 60px 28px 0; color:var(--muted); font-size:1rem; line-height:1.65; max-width:74ch}
 @media(max-width:720px){.faq-item .ans{padding-right:0}}
 
 /* ============ MARQUEE ============ */
-.marquee{
-  background:var(--paper);
-  padding:24px 0;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  overflow:hidden;
-}
-.marquee-track{
-  display:flex;
-  gap:48px;
-  white-space:nowrap;
-  font-family:var(--display);
-  font-size:clamp(1.2rem, 2.2vw, 1.8rem);
-  font-weight:400;
-  font-style:italic;
-  letter-spacing:-0.02em;
-  color:var(--ink);
-  animation:tickerScroll 60s linear infinite;
-  width:max-content;
-}
+.marquee{background:var(--paper); padding:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden}
+.marquee-track{display:flex; gap:48px; white-space:nowrap; font-family:var(--display); font-size:clamp(1.2rem, 2.2vw, 1.8rem); font-weight:400; font-style:italic; letter-spacing:-0.02em; color:var(--ink); animation:tickerScroll 60s linear infinite; width:max-content}
 .marquee-track span{display:inline-flex; align-items:center; gap:48px}
 .marquee-track span::after{content:"✦"; color:var(--accent); font-style:normal; font-size:0.7em}
 
 /* ============ FEATURED PROJECT ============ */
-.featured{
-  background:var(--ink);
-  color:#fff;
-  padding:100px 0;
-  overflow:hidden;
-}
-.featured-grid{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:grid;
-  grid-template-columns:1fr 1.4fr;
-  gap:56px;
-  align-items:center;
-}
+.featured{background:var(--ink); color:#fff; padding:100px 0; overflow:hidden}
+.featured-grid{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:grid; grid-template-columns:1fr 1.4fr; gap:56px; align-items:center}
 @media(max-width:880px){.featured-grid{grid-template-columns:1fr; gap:40px}}
 .featured h2{color:#fff; margin-bottom:24px}
 .featured h2 em{font-style:italic; font-weight:300; color:#fff}
@@ -655,67 +482,27 @@ section.tight{padding:64px 0}
 .featured-facts{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; max-width:380px}
 .featured-fact .lbl{font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:4px; font-weight:500}
 .featured-fact .val{font-family:var(--display); font-size:1.4rem; color:#fff; font-weight:500; letter-spacing:-0.02em}
-.featured-img{
-  aspect-ratio:4/3;
-  border-radius:16px;
-  overflow:hidden;
-  background:#222;
-  position:relative;
-}
+.featured-img{aspect-ratio:4/3; border-radius:16px; overflow:hidden; background:#222; position:relative}
 .featured-img img{width:100%; height:100%; object-fit:cover}
 
 /* ============ PROCESS ============ */
 .process-list{display:flex; flex-direction:column; gap:0}
-.process-row{
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  gap:56px;
-  padding:36px 0;
-  border-top:1px solid var(--line);
-  align-items:center;
-  transition:background 0.2s, padding 0.2s;
-}
+.process-row{display:grid; grid-template-columns:auto 1fr auto; gap:56px; padding:36px 0; border-top:1px solid var(--line); align-items:center; transition:background 0.2s, padding 0.2s}
 .process-row:last-child{border-bottom:1px solid var(--line)}
 .process-row:hover{padding-left:20px; padding-right:20px}
 @media(max-width:880px){.process-row{grid-template-columns:auto 1fr; gap:20px}}
-.process-row .pno{
-  font-family:var(--display);
-  font-size:clamp(2.6rem, 5vw, 4rem);
-  font-weight:300;
-  line-height:1;
-  letter-spacing:-0.04em;
-  color:var(--accent);
-  font-style:italic;
-  min-width:72px;
-}
+.process-row .pno{font-family:var(--display); font-size:clamp(2.6rem, 5vw, 4rem); font-weight:300; line-height:1; letter-spacing:-0.04em; color:var(--accent); font-style:italic; min-width:72px}
 .process-row h4{font-family:var(--display); font-size:clamp(1.4rem, 2.8vw, 2rem); font-weight:400; letter-spacing:-0.02em; margin-bottom:6px}
 .process-row p{font-size:0.98rem; color:var(--muted); max-width:54ch; line-height:1.55}
 .process-row .pdur{font-size:0.82rem; color:var(--muted); letter-spacing:0.04em; text-transform:uppercase; font-weight:500; text-align:right; white-space:nowrap}
 @media(max-width:880px){.process-row .pdur{grid-column:span 2; text-align:left; margin-top:6px}}
 
 /* ============ PRICING ============ */
-.price-list{
-  display:flex; flex-direction:column;
-  border-top:1px solid var(--line);
-}
-.price-row{
-  display:grid;
-  grid-template-columns:1fr auto auto;
-  gap:40px;
-  padding:28px 0;
-  border-bottom:1px solid var(--line);
-  align-items:baseline;
-  transition:padding 0.2s;
-}
+.price-list{display:flex; flex-direction:column; border-top:1px solid var(--line)}
+.price-row{display:grid; grid-template-columns:1fr auto auto; gap:40px; padding:28px 0; border-bottom:1px solid var(--line); align-items:baseline; transition:padding 0.2s}
 .price-row:hover{padding-left:16px}
 @media(max-width:720px){.price-row{grid-template-columns:1fr; gap:6px; padding:24px 0}}
-.price-name{
-  font-family:var(--display);
-  font-size:clamp(1.3rem, 2.4vw, 1.85rem);
-  font-weight:400;
-  letter-spacing:-0.02em;
-  display:flex; align-items:baseline; gap:16px;
-}
+.price-name{font-family:var(--display); font-size:clamp(1.3rem, 2.4vw, 1.85rem); font-weight:400; letter-spacing:-0.02em; display:flex; align-items:baseline; gap:16px}
 .price-name em{font-style:italic; color:var(--muted); font-weight:300; font-size:0.7em}
 .price-amt{font-family:var(--display); font-size:1.45rem; font-weight:500; letter-spacing:-0.02em}
 .price-amt em{font-style:italic; font-size:0.7em; font-weight:400; color:var(--muted); margin-right:6px}
@@ -724,179 +511,52 @@ section.tight{padding:64px 0}
 .price-link svg{width:13px; height:13px; transition:transform 0.2s}
 .price-link:hover svg{transform:translateX(4px)}
 
-/* ============ PULL QUOTE ============ */
-.pull-quote{
-  background:var(--paper);
-  padding:100px 0;
-}
-@media(max-width:720px){.pull-quote{padding:72px 0}}
-.pull-quote-inner{
-  max-width:1080px;
-  margin:0 auto;
-  padding:0 var(--gutter);
-  text-align:left;
-}
-.pull-quote-mark{
-  font-family:var(--display);
-  font-size:5rem;
-  font-style:italic;
-  font-weight:300;
-  line-height:0.6;
-  color:var(--accent);
-  margin-bottom:14px;
-}
-.pull-quote-text{
-  font-family:var(--display);
-  font-size:clamp(1.7rem, 3.4vw, 2.7rem);
-  font-weight:300;
-  line-height:1.25;
-  letter-spacing:-0.025em;
-  color:var(--ink);
-  margin-bottom:36px;
-  max-width:24ch;
-}
-.pull-quote-text em{font-style:italic}
-.pull-quote-author{
-  display:flex; align-items:center; gap:14px;
-  font-size:0.93rem;
-}
-.pq-avatar{
-  width:42px; height:42px;
-  border-radius:50%;
-  background:var(--ink);
-  color:#fff;
-  display:inline-flex; align-items:center; justify-content:center;
-  font-family:var(--sans);
-  font-weight:700; font-size:0.85rem;
-}
-.pq-name{font-weight:600}
-.pq-role{color:var(--muted); margin-top:2px; font-size:0.85rem}
-
 /* ============ CTA ============ */
-.cta{
-  background:var(--ink);
-  color:#fff;
-  padding:100px 0;
-  position:relative;
-  overflow:hidden;
-}
+.cta{background:var(--ink); color:#fff; padding:100px 0; position:relative; overflow:hidden}
 @media(max-width:720px){.cta{padding:72px 0}}
-.cta::before{
-  content:"";
-  position:absolute;
-  top:-200px; right:-200px;
-  width:600px; height:600px;
-  background:radial-gradient(circle, rgba(230,104,0,0.18), transparent 70%);
-  pointer-events:none;
-}
+.cta::before{content:""; position:absolute; top:-200px; right:-200px; width:600px; height:600px; background:radial-gradient(circle, rgba(230,104,0,0.18), transparent 70%); pointer-events:none}
 .cta-inner{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); position:relative}
-.cta-grid{
-  display:grid;
-  grid-template-columns:1.3fr 1fr;
-  gap:56px;
-  align-items:end;
-}
+.cta-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:end}
 @media(max-width:880px){.cta-grid{grid-template-columns:1fr; gap:36px}}
-.cta h2{
-  color:#fff;
-  font-size:clamp(2.5rem, 6vw, 5rem);
-  font-weight:400;
-  letter-spacing:-0.035em;
-  max-width:14ch;
-}
+.cta h2{color:#fff; font-size:clamp(2.5rem, 6vw, 5rem); font-weight:400; letter-spacing:-0.035em; max-width:14ch}
 .cta h2 em{font-style:italic; color:var(--accent); font-weight:300}
 .cta-right{display:flex; flex-direction:column; gap:20px}
 .cta-points{display:flex; flex-direction:column; gap:12px; margin-bottom:6px}
-.cta-points li{
-  list-style:none;
-  display:flex; gap:12px; align-items:flex-start;
-  font-size:0.96rem; color:rgba(255,255,255,0.85);
-}
+.cta-points li{list-style:none; display:flex; gap:12px; align-items:flex-start; font-size:0.96rem; color:rgba(255,255,255,0.85)}
 .cta-points svg{width:18px; height:18px; stroke:var(--accent); stroke-width:2.5; fill:none; flex-shrink:0; margin-top:3px}
 .cta-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:12px}
 
 /* ============ LEAD FORM ============ */
-.lead-form{
-  background:var(--paper);
-  padding:100px 0;
-  border-top:1px solid var(--line);
-}
+.lead-form{background:var(--paper); padding:100px 0; border-top:1px solid var(--line)}
 @media(max-width:720px){.lead-form{padding:72px 0}}
-.lead-form-grid{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:grid;
-  grid-template-columns:1fr 1.1fr;
-  gap:56px;
-  align-items:start;
-}
+.lead-form-grid{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:start}
 @media(max-width:880px){.lead-form-grid{grid-template-columns:1fr; gap:40px}}
 .lf-left h2{margin-bottom:18px}
 .lf-left h2 em{font-style:italic; color:var(--accent); font-weight:400}
 .lf-left p{font-size:1.02rem; color:var(--muted); max-width:42ch; line-height:1.6; margin-bottom:24px}
 .lf-facts{display:flex; flex-direction:column; gap:14px; padding-top:20px; border-top:1px solid var(--line)}
 .lf-fact{display:flex; gap:12px; align-items:flex-start}
-.lf-fact .ico{
-  width:30px; height:30px;
-  border-radius:50%;
-  background:var(--accent-soft);
-  display:inline-flex; align-items:center; justify-content:center;
-  flex-shrink:0;
-}
+.lf-fact .ico{width:30px; height:30px; border-radius:50%; background:var(--accent-soft); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0}
 .lf-fact .ico svg{width:13px; height:13px; stroke:var(--accent); stroke-width:2.5; fill:none}
 .lf-fact strong{display:block; font-weight:600; margin-bottom:2px}
 .lf-fact span{color:var(--muted); font-size:0.9rem}
-.form{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:36px;
-}
+.form{background:#fff; border:1px solid var(--line); border-radius:18px; padding:36px}
 @media(max-width:720px){.form{padding:24px}}
 .form-head{margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--line)}
 .form-head h3{font-size:1.45rem; margin-bottom:4px}
 .form-head .sub{font-size:0.88rem; color:var(--muted)}
 .field{margin-bottom:12px}
 .field label{display:block; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; color:var(--muted); margin-bottom:6px}
-.field input,.field select,.field textarea{
-  width:100%;
-  padding:13px 15px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  font-family:inherit;
-  font-size:0.96rem;
-  background:var(--paper);
-  transition:border-color 0.2s, background 0.2s;
-}
-.field input:focus,.field select:focus,.field textarea:focus{
-  outline:none;
-  border-color:var(--ink);
-  background:#fff;
-}
+.field input,.field select,.field textarea{width:100%; padding:13px 15px; border:1px solid var(--line); border-radius:10px; font-family:inherit; font-size:0.96rem; background:var(--paper); transition:border-color 0.2s, background 0.2s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none; border-color:var(--ink); background:#fff}
 .field-row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
 .form button[type=submit]{margin-top:6px}
 .form-note{font-size:0.78rem; color:var(--muted); text-align:center; margin-top:10px; display:flex; align-items:center; justify-content:center; gap:6px}
 .form-note svg{width:13px; height:13px; stroke:var(--muted); stroke-width:2; fill:none}
 
 /* ============ FOOTER ============ */
-footer{
-  background:var(--ink);
-  color:rgba(255,255,255,0.6);
-  padding:64px 0 28px;
-  font-size:0.92rem;
-}
-.f-top{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr 1fr;
-  gap:40px;
-  margin-bottom:48px;
-  padding-bottom:40px;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-}
+footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; font-size:0.92rem}
+.f-top{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.1)}
 @media(max-width:880px){.f-top{grid-template-columns:1fr 1fr; gap:28px}}
 @media(max-width:540px){.f-top{grid-template-columns:1fr}}
 .f-brand .logo{color:#fff}
@@ -907,34 +567,14 @@ footer{
 .f-top li{margin-bottom:8px}
 .f-top a{color:rgba(255,255,255,0.6); transition:color 0.2s}
 .f-top a:hover{color:var(--accent)}
-.f-bottom{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
-  font-size:0.84rem;
-}
+.f-bottom{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.84rem}
 
 /* ============ MOBILE STICKY ============ */
-.m-sticky{
-  display:none;
-  position:fixed;
-  bottom:0; left:0; right:0;
-  background:#fff;
-  border-top:1px solid var(--line);
-  padding:10px 14px;
-  z-index:60;
-  gap:8px;
-  box-shadow:0 -8px 24px rgba(0,0,0,0.08);
-}
+.m-sticky{display:none; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); padding:10px 14px; z-index:60; gap:8px; box-shadow:0 -8px 24px rgba(0,0,0,0.08)}
 .m-sticky .btn{flex:1; padding:13px; font-size:0.92rem; justify-content:center}
 @media(max-width:720px){.m-sticky{display:flex} body{padding-bottom:74px}}
 
-/* ============ FADE-IN ANIMATIONS ============ */
+/* ============ FADE-IN ============ */
 .fade-up{opacity:0; transform:translateY(24px); transition:opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)}
 .fade-up.visible{opacity:1; transform:translateY(0)}
 .fade-up.d1{transition-delay:0.1s}
@@ -944,60 +584,62 @@ footer{
 </head>
 <body>
 
-<!-- TICKER (fixed) -->
+<!-- TICKER -->
 <div class="top-ticker">
   <div class="ticker-track">
     <span class="ticker-item">Festpreis-Garantie nach Vor-Ort-Termin</span>
     <span class="ticker-item">45 eigene Handwerker — keine Subunternehmer</span>
     <span class="ticker-item">22 Jahre in der Region <span>Heidelberg / Mannheim / Heilbronn</span></span>
-    <span class="ticker-item">Eingetragener Meisterbetrieb — 10 Mio. € Haftpflicht</span>
+    <span class="ticker-item">Kostenlose Beratung vor Ort</span>
     <span class="ticker-item">4,9 ★ aus 180+ Bewertungen</span>
     <span class="ticker-item">Festpreis-Garantie nach Vor-Ort-Termin</span>
     <span class="ticker-item">45 eigene Handwerker — keine Subunternehmer</span>
     <span class="ticker-item">22 Jahre in der Region <span>Heidelberg / Mannheim / Heilbronn</span></span>
-    <span class="ticker-item">Eingetragener Meisterbetrieb — 10 Mio. € Haftpflicht</span>
+    <span class="ticker-item">Kostenlose Beratung vor Ort</span>
     <span class="ticker-item">4,9 ★ aus 180+ Bewertungen</span>
   </div>
 </div>
 
-<!-- NAV (below ticker) -->
+<!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#" class="logo">
-      <span class="logo-mark">HM</span>
-      HeinzelMänner
+      <img src="img/HM Logo.svg" alt="HeinzelMänner" class="logo-img">
     </a>
     <div class="nav-links">
       <a href="#leistungen">Leistungen</a>
-      <a href="#projekt">Referenz</a>
+      <a href="#projekte">Referenzen</a>
       <a href="#ablauf">Ablauf</a>
       <a href="#preise">Preise</a>
       <a href="#anfrage">Beratung</a>
     </div>
     <div class="nav-right">
-      <a href="tel:+491626151832" class="nav-phone">
+      <a href="tel:+4962249689465" class="nav-phone">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span>0162 6151832</span>
+        <span>06224 9689465</span>
       </a>
       <a href="#anfrage" class="btn btn-accent">Beratung anfragen</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO (2-column on desktop) -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-grid">
     <div>
       <div class="hero-eyebrow fade-up visible"><span class="dot"></span><span>Sanierung &middot; Rhein-Neckar &middot; Heilbronn</span></div>
       <h1 class="fade-up visible">Räume,<br><em>die bleiben.</em><br>Festpreis,<br><span class="accent italic">der hält.</span></h1>
-      <p class="hero-lede fade-up visible d1">Komplettsanierung &middot; Bad &middot; Boden &middot; Trockenbau &middot; Maler — <strong>alle Gewerke aus einer Hand.</strong> Ein Bauleiter, ein verbindlicher Festpreis, ein Endtermin. Seit 22 Jahren in der Region.</p>
+      <p class="hero-lede fade-up visible d1">Komplettsanierung &middot; Bad &middot; Boden &middot; Trockenbau &middot; Maler — <strong>alle Gewerke aus einer Hand.</strong> Ein Bauleiter, ein verbindlicher Festpreis, ein Endtermin.</p>
       <div class="hero-actions fade-up visible d2">
-        <a href="#anfrage" class="btn btn-lg">Kostenlose Beratung anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-        <a href="#leistungen" class="hero-link">Leistungen ansehen ↓</a>
+        <a href="#anfrage" class="btn btn-accent btn-lg">Kostenlose Beratung <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a href="tel:+4962249689465" class="btn btn-outline btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Jetzt anrufen
+        </a>
       </div>
     </div>
     <div class="hero-visual fade-up visible d1">
-      <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1800" alt="Modern saniertes Wohnzimmer">
+      <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Modern saniertes Wohnzimmer">
       <div class="hero-visual-caption">
         <div>
           <div class="vc-loc"><em>Wohnungssanierung</em></div>
@@ -1024,10 +666,6 @@ footer{
       <div class="num">430<em>+</em></div>
       <div class="lbl">Abgeschlossene<br>Sanierungsprojekte</div>
     </div>
-    <div class="stat fade-up d3">
-      <div class="num">10 <em>Mio.</em></div>
-      <div class="lbl">Euro Betriebs-<br>haftpflichtsumme</div>
-    </div>
   </div>
 </section>
 
@@ -1053,7 +691,7 @@ footer{
             <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </div>
         </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" alt="Kernsanierung Wohnung"></div>
+        <div class="svc-img"><img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Kernsanierung Wohnung"></div>
       </a>
 
       <a href="bad.html" class="svc alt fade-up">
@@ -1066,7 +704,7 @@ footer{
             <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </div>
         </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" alt="Modernes Bad mit Dusche"></div>
+        <div class="svc-img"><img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Modernes Bad mit Dusche"></div>
       </a>
 
       <a href="boden.html" class="svc fade-up">
@@ -1079,7 +717,7 @@ footer{
             <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </div>
         </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" alt="Holzboden modernes Wohnzimmer"></div>
+        <div class="svc-img"><img src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Holzboden modernes Wohnzimmer"></div>
       </a>
 
       <a href="trockenbau.html" class="svc alt fade-up">
@@ -1092,7 +730,7 @@ footer{
             <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </div>
         </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" alt="Trockenbau Raumtrennung"></div>
+        <div class="svc-img"><img src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Trockenbau Raumtrennung"></div>
       </a>
 
       <a href="maler.html" class="svc fade-up">
@@ -1105,11 +743,20 @@ footer{
             <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           </div>
         </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1400" alt="Frisch gestrichener Raum"></div>
+        <div class="svc-img"><img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Frisch gestrichener Raum"></div>
       </a>
     </div>
   </div>
 </section>
+
+<!-- INLINE CTA 1 — after Leistungen -->
+<div class="inline-cta">
+  <div class="inline-cta-inner">
+    <p>Welches Gewerk brauchen Sie? <em>Wir beraten kostenlos.</em></p>
+    <a href="#anfrage" class="btn">Beratung anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="tel:+4962249689465" class="btn">06224 9689465</a>
+  </div>
+</div>
 
 <!-- MARQUEE -->
 <div class="marquee">
@@ -1119,13 +766,79 @@ footer{
   </div>
 </div>
 
+<!-- PROJECTS GALLERY (moved up) -->
+<section id="projekte">
+  <div class="wrap">
+    <div class="section-head fade-up">
+      <div class="index"><strong>03</strong> <em>Referenzen</em></div>
+      <div>
+        <h2>Beispiel&shy;projekte<br>aus der <em>Region.</em></h2>
+        <p class="desc">Über 430 abgeschlossene Sanierungen in Heidelberg, Mannheim und im Raum Heilbronn. Hier einige unserer letzten Arbeiten.</p>
+      </div>
+    </div>
+
+    <div class="proj-grid">
+      <div class="proj-card lg fade-up">
+        <img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Komplettsanierung Wohnung modern">
+        <div class="pmeta">
+          <span class="ptag">Kernsanierung</span>
+          <div class="pname"><em>Altbauwohnung 95 m²</em> · Heidelberg-Wieblingen</div>
+        </div>
+      </div>
+      <div class="proj-card md fade-up">
+        <img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Modernes Badezimmer">
+        <div class="pmeta">
+          <span class="ptag">Bad</span>
+          <div class="pname"><em>Komplettbad 6 m²</em> · Heidelberg</div>
+        </div>
+      </div>
+      <div class="proj-card md fade-up">
+        <img src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Wohnzimmer mit Designboden">
+        <div class="pmeta">
+          <span class="ptag">Boden &amp; Maler</span>
+          <div class="pname"><em>3-Zimmer-Wohnung</em> · Mannheim-Lindenhof</div>
+        </div>
+      </div>
+      <div class="proj-card md fade-up">
+        <img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Walk-in Dusche Bad">
+        <div class="pmeta">
+          <span class="ptag">Bad</span>
+          <div class="pname"><em>Walk-in-Dusche</em> · Sinsheim</div>
+        </div>
+      </div>
+      <div class="proj-card md fade-up">
+        <img src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Modernes Schlafzimmer">
+        <div class="pmeta">
+          <span class="ptag">Maler &amp; Boden</span>
+          <div class="pname"><em>Schlafzimmer komplett</em> · Ludwigshafen</div>
+        </div>
+      </div>
+      <div class="proj-card wide fade-up">
+        <img src="https://images.pexels.com/photos/6587828/pexels-photo-6587828.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Moderne Küche">
+        <div class="pmeta">
+          <span class="ptag">Kernsanierung</span>
+          <div class="pname"><em>Küche &amp; Wohnbereich</em> · Schwetzingen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INLINE CTA 2 — after Projekte -->
+<div class="inline-cta">
+  <div class="inline-cta-inner">
+    <p>Ähnliches Projekt <em>geplant?</em></p>
+    <a href="#anfrage" class="btn">Kostenloses Angebot anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+  </div>
+</div>
+
 <!-- WARUM HEINZELMÄNNER -->
 <section id="warum">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>03</strong> <em>Warum HeinzelMänner</em></div>
+      <div class="index"><strong>04</strong> <em>Warum HeinzelMänner</em></div>
       <div>
-        <h2>Sechs Gründe,<br><em>die zählen.</em></h2>
+        <h2>Vier Gründe,<br><em>die zählen.</em></h2>
         <p class="desc">Was uns von anderen Sanierungs­firmen unterscheidet — und was Sie als Auftraggeber davon haben.</p>
       </div>
     </div>
@@ -1148,26 +861,12 @@ footer{
       <div class="usp-item fade-up">
         <span class="uno">03</span>
         <div>
-          <h4>Versichert &amp; geprüft</h4>
-          <p>10 Mio. € Betriebshaftpflicht, eingetragener Meisterbetrieb, alle Mitarbeiter sozialversichert. Auf Wunsch Bonitätsauskunft per UBO oder Creditreform.</p>
-        </div>
-      </div>
-      <div class="usp-item fade-up">
-        <span class="uno">04</span>
-        <div>
           <h4>Persönliche Beratung vor Ort</h4>
           <p>Kein anonymer Online-Kalkulator. Unser Bauleiter kommt zu Ihnen, schaut sich Substanz und Anschlüsse an, hört zu und berät ehrlich — kostenlos und unverbindlich.</p>
         </div>
       </div>
       <div class="usp-item fade-up">
-        <span class="uno">05</span>
-        <div>
-          <h4>5 Jahre Gewährleistung</h4>
-          <p>Auf alle ausgeführten Arbeiten — weit über das gesetzliche Maß hinaus. Was wir bauen, das hält. Sollte etwas nicht stimmen, kommen wir zurück und stellen es in Ordnung.</p>
-        </div>
-      </div>
-      <div class="usp-item fade-up">
-        <span class="uno">06</span>
+        <span class="uno">04</span>
         <div>
           <h4>Regional verwurzelt</h4>
           <p>Seit über 22 Jahren in Leimen ansässig. Wir kennen die Region, die Behörden, die Hausverwaltungen, die typische Bausubstanz — kurze Wege, schnelle Termine.</p>
@@ -1181,7 +880,7 @@ footer{
 <section class="featured" id="projekt">
   <div class="featured-grid">
     <div class="fade-up">
-      <div class="eyebrow" style="color:rgba(255,255,255,0.5); margin-bottom:20px"><strong style="color:var(--accent); font-family:var(--sans); font-weight:600">04</strong> &nbsp;/&nbsp; <em class="italic" style="font-family:var(--display)">Referenzprojekt</em></div>
+      <div class="eyebrow" style="color:rgba(255,255,255,0.5); margin-bottom:20px"><strong style="color:var(--accent); font-family:var(--sans); font-weight:600">05</strong> &nbsp;/&nbsp; <em class="italic" style="font-family:var(--display)">Referenzprojekt</em></div>
       <h2>Altbau&shy;wohnung,<br><em>komplett</em> neu gedacht.</h2>
       <p class="featured-lede">Eine 95 m² Altbauwohnung von 1928 — kernsaniert, modernisiert, energetisch ertüchtigt. Vom Rückbau über Sanitär und Elektro bis zur Schlüsselübergabe in 8 Wochen.</p>
       <div class="featured-facts">
@@ -1193,7 +892,7 @@ footer{
       <a href="#anfrage" class="btn btn-light">Ähnliches Projekt anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
     </div>
     <div class="featured-img fade-up d1">
-      <img src="https://images.pexels.com/photos/6587828/pexels-photo-6587828.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" alt="Kernsanierte Altbauwohnung Heidelberg">
+      <img src="https://images.pexels.com/photos/6587828/pexels-photo-6587828.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kernsanierte Altbauwohnung Heidelberg">
     </div>
   </div>
 </section>
@@ -1202,7 +901,7 @@ footer{
 <section class="calc-section" id="rechner">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>05</strong> <em>Preis-Indikator</em></div>
+      <div class="index"><strong>06</strong> <em>Preis-Indikator</em></div>
       <div>
         <h2>Was kostet<br><em>meine Sanierung?</em></h2>
         <p class="desc">Geben Sie uns einen groben Rahmen — der Rechner zeigt Ihnen sofort eine Preisspanne auf Basis typischer Projekte. Den verbindlichen Festpreis erhalten Sie nach kostenloser Vor-Ort-Begehung.</p>
@@ -1274,7 +973,7 @@ footer{
 <section id="ablauf">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>06</strong> <em>Ablauf</em></div>
+      <div class="index"><strong>07</strong> <em>Ablauf</em></div>
       <div>
         <h2>Vier Schritte.<br><em>Ein Festpreis.</em></h2>
         <p class="desc">Transparent, planbar, ohne Überraschungen. Vom ersten Telefonat bis zum übergebenen Projekt — Sie wissen jederzeit, wo wir stehen.</p>
@@ -1322,7 +1021,7 @@ footer{
 <section id="preise" class="tight" style="background:var(--paper-2)">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>07</strong> <em>Festpreis-Übersicht</em></div>
+      <div class="index"><strong>08</strong> <em>Festpreis-Übersicht</em></div>
       <div>
         <h2>Preise im<br><em>Überblick.</em></h2>
         <p class="desc">Unsere Festpreise pro Leistung als Orientierung. Klicken Sie auf eine Position für die detaillierte Beschreibung mit allen enthaltenen Arbeiten.</p>
@@ -1359,78 +1058,14 @@ footer{
   </div>
 </section>
 
-<!-- PROJECTS GALLERY -->
-<section id="projekte">
-  <div class="wrap">
-    <div class="section-head fade-up">
-      <div class="index"><strong>08</strong> <em>Referenzen</em></div>
-      <div>
-        <h2>Beispiel&shy;projekte<br>aus der <em>Region.</em></h2>
-        <p class="desc">Über 430 abgeschlossene Sanierungen in Heidelberg, Mannheim und im Raum Heilbronn. Hier einige unserer letzten Arbeiten.</p>
-      </div>
-    </div>
-
-    <div class="proj-grid">
-      <div class="proj-card lg fade-up">
-        <img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" alt="Komplettsanierung Wohnung modern">
-        <div class="pmeta">
-          <span class="ptag">Kernsanierung</span>
-          <div class="pname"><em>Altbauwohnung 95 m²</em> · Heidelberg-Wieblingen</div>
-        </div>
-      </div>
-      <div class="proj-card md fade-up">
-        <img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Modernes Badezimmer">
-        <div class="pmeta">
-          <span class="ptag">Bad</span>
-          <div class="pname"><em>Komplettbad 6 m²</em> · Heidelberg</div>
-        </div>
-      </div>
-      <div class="proj-card md fade-up">
-        <img src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Wohnzimmer mit Designboden">
-        <div class="pmeta">
-          <span class="ptag">Boden &amp; Maler</span>
-          <div class="pname"><em>3-Zimmer-Wohnung</em> · Mannheim-Lindenhof</div>
-        </div>
-      </div>
-      <div class="proj-card md fade-up">
-        <img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Walk-in Dusche Bad">
-        <div class="pmeta">
-          <span class="ptag">Bad</span>
-          <div class="pname"><em>Walk-in-Dusche</em> · Sinsheim</div>
-        </div>
-      </div>
-      <div class="proj-card md fade-up">
-        <img src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Modernes Schlafzimmer">
-        <div class="pmeta">
-          <span class="ptag">Maler &amp; Boden</span>
-          <div class="pname"><em>Schlafzimmer komplett</em> · Ludwigshafen</div>
-        </div>
-      </div>
-      <div class="proj-card wide fade-up">
-        <img src="https://images.pexels.com/photos/6587828/pexels-photo-6587828.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" alt="Moderne Küche">
-        <div class="pmeta">
-          <span class="ptag">Kernsanierung</span>
-          <div class="pname"><em>Küche &amp; Wohnbereich</em> · Schwetzingen</div>
-        </div>
-      </div>
-    </div>
+<!-- INLINE CTA 3 — before FAQ -->
+<div class="inline-cta">
+  <div class="inline-cta-inner">
+    <p>Jetzt <em>Festpreis sichern</em> — Beratung in 48 Stunden vor Ort.</p>
+    <a href="tel:+4962249689465" class="btn">06224 9689465</a>
+    <a href="#anfrage" class="btn">Formular ausfüllen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
   </div>
-</section>
-
-<!-- PULL QUOTE -->
-<section class="pull-quote">
-  <div class="pull-quote-inner fade-up">
-    <div class="pull-quote-mark">"</div>
-    <p class="pull-quote-text">Andere Firmen wollten <em>Wochen für ein Angebot</em> — Herr Heck war innerhalb von 2 Tagen vor Ort. Drei Wochen später ging's los.</p>
-    <div class="pull-quote-author">
-      <div class="pq-avatar">CK</div>
-      <div>
-        <div class="pq-name">Christine K.</div>
-        <div class="pq-role">Kernsanierung &middot; Mannheim</div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- FAQ -->
 <section id="faq">
@@ -1459,10 +1094,6 @@ footer{
       <details class="faq-item">
         <summary>Gibt es einen Festpreis oder Abrechnung nach Aufwand?</summary>
         <div class="ans">Wir arbeiten ausschließlich mit Festpreisen, die wir nach der Vor-Ort-Begehung schriftlich anbieten. Dieser Preis ist verbindlich und gilt — auch wenn die Arbeit am Ende länger dauert als kalkuliert. Nur wenn Sie selbst nachträglich Änderungen wünschen, vereinbaren wir das gesondert.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Welche Garantie / Gewährleistung gibt es?</summary>
-        <div class="ans">Auf alle ausgeführten Arbeiten geben wir 5 Jahre Gewährleistung — deutlich über das gesetzliche Maß hinaus. Wir sind eingetragener Meisterbetrieb mit 10 Mio. € Betriebshaftpflicht. Sollte etwas nicht stimmen, kommen wir zurück und stellen es kostenlos in Ordnung.</div>
       </details>
       <details class="faq-item">
         <summary>Können wir während der Sanierung in der Wohnung wohnen?</summary>
@@ -1553,12 +1184,12 @@ footer{
         <ul class="cta-points">
           <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Kostenlose Vor-Ort-Beratung binnen 48 Stunden</li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Verbindlicher Festpreis — keine Nachforderungen</li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 5 Jahre Gewährleistung auf alle Arbeiten</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 45 eigene Handwerker — keine Subunternehmer</li>
         </ul>
         <div class="cta-actions">
-          <a href="tel:+491626151832" class="btn btn-accent btn-lg">
+          <a href="tel:+4962249689465" class="btn btn-accent btn-lg">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            0162 6151832
+            06224 9689465
           </a>
           <a href="#anfrage" class="btn btn-light btn-lg">Formular ausfüllen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div>
@@ -1571,7 +1202,7 @@ footer{
 <footer>
   <div class="f-top">
     <div class="f-brand">
-      <a href="#" class="logo"><span class="logo-mark">HM</span>HeinzelMänner</a>
+      <a href="#" class="logo"><img src="img/HM Logo.svg" alt="HeinzelMänner" class="logo-img"></a>
       <p>Sanierung &amp; Renovierung in der Metropolregion Rhein-Neckar und im Raum Heilbronn. Seit 22 Jahren — Festpreis garantiert.</p>
     </div>
     <div>
@@ -1587,7 +1218,7 @@ footer{
     <div>
       <h5>Kontakt</h5>
       <p>HeinzelMänner GmbH<br>Im Hagen 4<br>69181 Leimen</p>
-      <p style="margin-top:12px"><a href="tel:+491626151832" style="color:#fff">0162 6151832</a><br><a href="mailto:info@hm-sanierung.com">info@hm-sanierung.com</a></p>
+      <p style="margin-top:12px"><a href="tel:+4962249689465" style="color:#fff">06224 9689465</a><br><a href="mailto:info@hm-sanierung.com">info@hm-sanierung.com</a></p>
     </div>
     <div>
       <h5>Rechtliches</h5>
@@ -1606,18 +1237,16 @@ footer{
 
 <!-- MOBILE STICKY -->
 <div class="m-sticky">
-  <a href="tel:+491626151832" class="btn">Anrufen</a>
+  <a href="tel:+4962249689465" class="btn">Anrufen</a>
   <a href="#anfrage" class="btn btn-accent">Beratung</a>
 </div>
 
 <script>
-// Sticky nav with backdrop
 const nav = document.getElementById('nav');
 const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
 window.addEventListener('scroll', onScroll, {passive:true});
 onScroll();
 
-// Fade-up on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting){
