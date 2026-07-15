@@ -47,12 +47,21 @@ img{display:block; max-width:100%}
 a{color:inherit; text-decoration:none}
 button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit}
 
-/* ============ TYPE ============ */
-h1,h2,h3,h4{font-family:var(--display); font-weight:600; color:var(--ink); letter-spacing:-0.025em; line-height:0.98}
-h1{font-size:clamp(2.4rem, 6vw, 5.5rem); font-weight:500; letter-spacing:-0.035em}
-h2{font-size:clamp(2.2rem, 5.5vw, 4.5rem); font-weight:500; line-height:1}
-h3{font-size:clamp(1.3rem, 2.2vw, 1.75rem); font-weight:500; line-height:1.1}
+/* ============ TYPE — fixed sizes with breakpoints ============ */
+h1,h2,h3,h4{font-family:var(--display); font-weight:600; color:var(--ink); letter-spacing:-0.025em; line-height:1}
+h1{font-size:4.2rem; font-weight:500; letter-spacing:-0.035em; line-height:0.96}
+h2{font-size:3.2rem; font-weight:500; line-height:1}
+h3{font-size:1.6rem; font-weight:500; line-height:1.1}
 h4{font-size:1.1rem; font-weight:600; line-height:1.2}
+@media(max-width:980px){
+  h1{font-size:3.2rem}
+  h2{font-size:2.6rem}
+}
+@media(max-width:540px){
+  h1{font-size:2.5rem}
+  h2{font-size:2.1rem}
+  h3{font-size:1.35rem}
+}
 .serif{font-family:var(--display)}
 .italic{font-style:italic}
 .eyebrow{
@@ -126,10 +135,7 @@ section.tight{padding:64px 0}
   letter-spacing:-0.03em;
   color:var(--ink);
 }
-.logo-img{
-  height:38px;
-  width:auto;
-}
+.logo-img{height:38px; width:auto}
 .nav-links{display:flex; gap:34px; font-size:0.92rem; font-weight:500}
 .nav-links a{color:var(--ink); position:relative; padding:4px 0}
 .nav-links a::after{
@@ -175,14 +181,12 @@ section.tight{padding:64px 0}
 .btn-light{background:#fff; color:var(--ink)}
 .btn-light:hover{background:var(--accent); color:#fff}
 .btn-lg{padding:20px 36px; font-size:1.02rem}
-.btn-xl{padding:24px 44px; font-size:1.1rem}
 .btn svg{width:16px; height:16px; transition:transform 0.2s}
 .btn:hover svg{transform:translateX(4px)}
 .btn-block{width:100%; justify-content:center}
 
 /* ============ HERO ============ */
 .hero{
-  /* clear fixed ticker (40px) + nav (~56px) */
   padding:calc(var(--ticker-h) + 80px) 0 48px;
   position:relative;
   overflow:hidden;
@@ -216,15 +220,6 @@ section.tight{padding:64px 0}
 .hero-lede{font-size:1.05rem; color:var(--muted); line-height:1.55; max-width:52ch; margin-bottom:24px}
 .hero-lede strong{color:var(--ink); font-weight:600}
 .hero-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-.hero-link{
-  font-size:0.95rem; font-weight:600;
-  display:inline-flex; align-items:center; gap:8px;
-  color:var(--ink);
-  border-bottom:1.5px solid var(--ink);
-  padding-bottom:3px;
-  transition:color 0.2s, border-color 0.2s;
-}
-.hero-link:hover{color:var(--accent); border-color:var(--accent)}
 
 .hero-visual{
   position:relative;
@@ -266,7 +261,6 @@ section.tight{padding:64px 0}
   letter-spacing:0.06em;
   text-transform:uppercase;
 }
-.hero-num{display:none}
 
 /* ============ STATS ============ */
 .stats{
@@ -282,40 +276,29 @@ section.tight{padding:64px 0}
   grid-template-columns:repeat(3, 1fr);
   gap:40px;
 }
-@media(max-width:880px){.stats-inner{grid-template-columns:repeat(3, 1fr); gap:24px}}
 @media(max-width:540px){.stats-inner{grid-template-columns:1fr; gap:28px; text-align:center}}
 .stat .num{
   font-family:var(--display);
-  font-size:clamp(2.8rem, 5vw, 4.2rem);
+  font-size:3.6rem;
   font-weight:400;
   line-height:1;
   letter-spacing:-0.04em;
   margin-bottom:10px;
   color:#fff;
 }
+@media(max-width:540px){.stat .num{font-size:2.8rem}}
 .stat .num em{font-style:italic; color:var(--accent); font-weight:400}
 .stat .lbl{font-size:0.85rem; color:rgba(255,255,255,0.55); font-weight:500; letter-spacing:0.04em; line-height:1.4}
 
-/* ============ SECTION HEAD ============ */
+/* ============ SECTION HEAD — simplified, no index ============ */
 .section-head{
-  display:grid;
-  grid-template-columns:1fr 1.4fr;
-  gap:60px;
   margin-bottom:64px;
-  align-items:start;
+  max-width:680px;
 }
-@media(max-width:980px){.section-head{grid-template-columns:1fr; gap:20px}}
-.section-head .index{
-  font-family:var(--display);
-  font-style:italic;
-  font-size:0.92rem;
-  color:var(--muted);
-  font-weight:400;
-}
-.section-head .index strong{color:var(--accent); font-style:normal; font-weight:600; font-family:var(--sans); letter-spacing:0.06em; font-size:0.82rem; margin-right:6px}
-.section-head h2{max-width:18ch}
+.section-head .eyebrow{margin-bottom:16px}
+.section-head h2{margin-bottom:16px}
 .section-head h2 em{font-style:italic; color:var(--accent); font-weight:400}
-.section-head .desc{font-size:1.02rem; color:var(--muted); line-height:1.55; max-width:46ch; margin-top:16px}
+.section-head .desc{font-size:1.02rem; color:var(--muted); line-height:1.55; max-width:52ch}
 
 /* ============ SERVICES ============ */
 .services-list{display:flex; flex-direction:column; gap:0}
@@ -330,10 +313,22 @@ section.tight{padding:64px 0}
 .svc:last-child{border-bottom:1px solid var(--line)}
 @media(max-width:880px){.svc{grid-template-columns:1fr; gap:28px; padding:40px 0}}
 .svc-meta{display:flex; flex-direction:column; gap:20px}
-.svc-no{font-family:var(--display); font-size:0.95rem; font-style:italic; color:var(--muted); font-weight:400}
-.svc-no strong{color:var(--accent); font-style:normal; font-family:var(--sans); font-weight:600}
-.svc h3{font-size:clamp(2rem, 4.5vw, 3.4rem); font-weight:400; letter-spacing:-0.03em; line-height:0.98}
+.svc-tag{
+  display:inline-block;
+  font-size:0.72rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--accent);
+  background:var(--accent-soft);
+  padding:5px 12px;
+  border-radius:999px;
+  width:fit-content;
+}
+.svc h3{font-size:2.6rem; font-weight:400; letter-spacing:-0.03em; line-height:0.98}
 .svc h3 em{font-style:italic; font-weight:300}
+@media(max-width:980px){.svc h3{font-size:2.2rem}}
+@media(max-width:540px){.svc h3{font-size:1.8rem}}
 .svc-desc{font-size:1rem; color:var(--muted); line-height:1.6; max-width:42ch}
 .svc-bottom{display:flex; justify-content:space-between; align-items:end; gap:24px; margin-top:12px}
 .svc-price{font-size:0.82rem; color:var(--muted); letter-spacing:0.04em; text-transform:uppercase; font-weight:500}
@@ -367,11 +362,12 @@ section.tight{padding:64px 0}
 }
 .inline-cta p{
   font-family:var(--display);
-  font-size:clamp(1.3rem, 2.5vw, 1.9rem);
+  font-size:1.6rem;
   font-weight:500;
   color:#fff;
   letter-spacing:-0.02em;
 }
+@media(max-width:540px){.inline-cta p{font-size:1.3rem}}
 .inline-cta p em{font-style:italic; font-weight:300}
 .inline-cta .btn{background:#fff; color:var(--ink)}
 .inline-cta .btn:hover{background:var(--ink); color:#fff}
@@ -385,17 +381,19 @@ section.tight{padding:64px 0}
 }
 @media(max-width:880px){.usp-grid{grid-template-columns:1fr}}
 .usp-item{
-  display:grid;
-  grid-template-columns:auto 1fr;
-  gap:24px;
-  padding:36px 24px 36px 0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:36px 40px 36px 0;
   border-bottom:1px solid var(--line);
-  align-items:start;
 }
 .usp-item:nth-child(odd){padding-right:40px; border-right:1px solid var(--line)}
-@media(max-width:880px){.usp-item:nth-child(odd){border-right:none; padding-right:0}}
-.usp-item .uno{font-family:var(--display); font-style:italic; font-size:1.05rem; color:var(--accent); font-weight:400; line-height:1.2; min-width:32px; padding-top:4px}
-.usp-item h4{font-family:var(--display); font-size:clamp(1.2rem, 1.8vw, 1.45rem); font-weight:500; letter-spacing:-0.02em; line-height:1.15; margin-bottom:8px; color:var(--ink)}
+.usp-item:nth-child(even){padding-left:40px}
+@media(max-width:880px){
+  .usp-item:nth-child(odd){border-right:none; padding-right:0}
+  .usp-item:nth-child(even){padding-left:0}
+}
+.usp-item h4{font-family:var(--display); font-size:1.35rem; font-weight:500; letter-spacing:-0.02em; line-height:1.15; color:var(--ink)}
 .usp-item p{font-size:0.94rem; color:var(--muted); line-height:1.55; margin:0; max-width:46ch}
 
 /* ============ CALCULATOR ============ */
@@ -426,7 +424,8 @@ section.tight{padding:64px 0}
 .calc-slider-wrap input[type=range]{width:100%; accent-color:var(--accent); cursor:pointer}
 .calc-result{background:var(--ink); color:#fff; border-radius:14px; padding:24px; text-align:center; margin-bottom:16px}
 .calc-result .l{font-size:0.74rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,0.55); margin-bottom:8px}
-.calc-result .r{font-family:var(--display); font-size:clamp(1.6rem, 3vw, 2.3rem); font-weight:500; letter-spacing:-0.025em; line-height:1.1}
+.calc-result .r{font-family:var(--display); font-size:2rem; font-weight:500; letter-spacing:-0.025em; line-height:1.1}
+@media(max-width:540px){.calc-result .r{font-size:1.6rem}}
 .calc-result .r .sep{color:var(--accent); margin:0 4px}
 .calc-result .d{font-size:0.78rem; color:rgba(255,255,255,0.55); margin-top:8px}
 
@@ -452,7 +451,8 @@ section.tight{padding:64px 0}
 /* ============ FAQ ============ */
 .faq-list{display:flex; flex-direction:column; border-top:1px solid var(--line)}
 .faq-item{border-bottom:1px solid var(--line)}
-.faq-item summary{list-style:none; cursor:pointer; padding:24px 0; display:flex; justify-content:space-between; align-items:center; gap:24px; font-family:var(--display); font-size:clamp(1.15rem, 2.2vw, 1.45rem); font-weight:500; letter-spacing:-0.02em; color:var(--ink); transition:padding 0.2s}
+.faq-item summary{list-style:none; cursor:pointer; padding:24px 0; display:flex; justify-content:space-between; align-items:center; gap:24px; font-family:var(--display); font-size:1.3rem; font-weight:500; letter-spacing:-0.02em; color:var(--ink); transition:padding 0.2s}
+@media(max-width:540px){.faq-item summary{font-size:1.15rem}}
 .faq-item summary::-webkit-details-marker{display:none}
 .faq-item summary:hover{padding-left:12px}
 .faq-item summary::after{content:""; width:34px; height:34px; border:1.5px solid var(--ink); border-radius:50%; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='2' stroke-linecap='round'><path d='M12 5v14M5 12h14'/></svg>"); background-size:14px; background-repeat:no-repeat; background-position:center; flex-shrink:0; transition:transform 0.3s, background-color 0.2s, border-color 0.2s}
@@ -462,7 +462,8 @@ section.tight{padding:64px 0}
 
 /* ============ MARQUEE ============ */
 .marquee{background:var(--paper); padding:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden}
-.marquee-track{display:flex; gap:48px; white-space:nowrap; font-family:var(--display); font-size:clamp(1.2rem, 2.2vw, 1.8rem); font-weight:400; font-style:italic; letter-spacing:-0.02em; color:var(--ink); animation:tickerScroll 60s linear infinite; width:max-content}
+.marquee-track{display:flex; gap:48px; white-space:nowrap; font-family:var(--display); font-size:1.5rem; font-weight:400; font-style:italic; letter-spacing:-0.02em; color:var(--ink); animation:tickerScroll 60s linear infinite; width:max-content}
+@media(max-width:540px){.marquee-track{font-size:1.2rem}}
 .marquee-track span{display:inline-flex; align-items:center; gap:48px}
 .marquee-track span::after{content:"✦"; color:var(--accent); font-style:normal; font-size:0.7em}
 
@@ -470,6 +471,7 @@ section.tight{padding:64px 0}
 .featured{background:var(--ink); color:#fff; padding:100px 0; overflow:hidden}
 .featured-grid{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:grid; grid-template-columns:1fr 1.4fr; gap:56px; align-items:center}
 @media(max-width:880px){.featured-grid{grid-template-columns:1fr; gap:40px}}
+.featured .eyebrow{color:rgba(255,255,255,0.5); margin-bottom:20px}
 .featured h2{color:#fff; margin-bottom:24px}
 .featured h2 em{font-style:italic; font-weight:300; color:#fff}
 .featured h2 .accent{color:var(--accent); font-weight:400}
@@ -486,8 +488,10 @@ section.tight{padding:64px 0}
 .process-row:last-child{border-bottom:1px solid var(--line)}
 .process-row:hover{padding-left:20px; padding-right:20px}
 @media(max-width:880px){.process-row{grid-template-columns:auto 1fr; gap:20px}}
-.process-row .pno{font-family:var(--display); font-size:clamp(2.6rem, 5vw, 4rem); font-weight:300; line-height:1; letter-spacing:-0.04em; color:var(--accent); font-style:italic; min-width:72px}
-.process-row h4{font-family:var(--display); font-size:clamp(1.4rem, 2.8vw, 2rem); font-weight:400; letter-spacing:-0.02em; margin-bottom:6px}
+.process-row .pno{font-family:var(--display); font-size:3.2rem; font-weight:300; line-height:1; letter-spacing:-0.04em; color:var(--accent); font-style:italic; min-width:72px}
+@media(max-width:540px){.process-row .pno{font-size:2.6rem}}
+.process-row h4{font-family:var(--display); font-size:1.7rem; font-weight:400; letter-spacing:-0.02em; margin-bottom:6px}
+@media(max-width:540px){.process-row h4{font-size:1.4rem}}
 .process-row p{font-size:0.98rem; color:var(--muted); max-width:54ch; line-height:1.55}
 .process-row .pdur{font-size:0.82rem; color:var(--muted); letter-spacing:0.04em; text-transform:uppercase; font-weight:500; text-align:right; white-space:nowrap}
 @media(max-width:880px){.process-row .pdur{grid-column:span 2; text-align:left; margin-top:6px}}
@@ -497,7 +501,8 @@ section.tight{padding:64px 0}
 .price-row{display:grid; grid-template-columns:1fr auto auto; gap:40px; padding:28px 0; border-bottom:1px solid var(--line); align-items:baseline; transition:padding 0.2s}
 .price-row:hover{padding-left:16px}
 @media(max-width:720px){.price-row{grid-template-columns:1fr; gap:6px; padding:24px 0}}
-.price-name{font-family:var(--display); font-size:clamp(1.3rem, 2.4vw, 1.85rem); font-weight:400; letter-spacing:-0.02em; display:flex; align-items:baseline; gap:16px}
+.price-name{font-family:var(--display); font-size:1.55rem; font-weight:400; letter-spacing:-0.02em; display:flex; align-items:baseline; gap:16px}
+@media(max-width:540px){.price-name{font-size:1.3rem}}
 .price-name em{font-style:italic; color:var(--muted); font-weight:300; font-size:0.7em}
 .price-amt{font-family:var(--display); font-size:1.45rem; font-weight:500; letter-spacing:-0.02em}
 .price-amt em{font-style:italic; font-size:0.7em; font-weight:400; color:var(--muted); margin-right:6px}
@@ -513,7 +518,9 @@ section.tight{padding:64px 0}
 .cta-inner{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); position:relative}
 .cta-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:end}
 @media(max-width:880px){.cta-grid{grid-template-columns:1fr; gap:36px}}
-.cta h2{color:#fff; font-size:clamp(2.5rem, 6vw, 5rem); font-weight:400; letter-spacing:-0.035em; max-width:14ch}
+.cta h2{color:#fff; font-size:3.8rem; font-weight:400; letter-spacing:-0.035em; max-width:14ch}
+@media(max-width:980px){.cta h2{font-size:3rem}}
+@media(max-width:540px){.cta h2{font-size:2.4rem}}
 .cta h2 em{font-style:italic; color:var(--accent); font-weight:300}
 .cta-right{display:flex; flex-direction:column; gap:20px}
 .cta-points{display:flex; flex-direction:column; gap:12px; margin-bottom:6px}
@@ -668,17 +675,15 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section id="leistungen">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>02</strong> &nbsp;/ <em>&nbsp;Leistungen</em></div>
-      <div>
-        <h2>Fünf Gewerke,<br><em>ein Partner.</em></h2>
-        <p class="desc">Ob nur das Bad oder die komplette Wohnung — wir koordinieren sämtliche Gewerke und liefern ein einziges Festpreisangebot. Keine Schnittstellen, keine Verantwortungs-Spielchen.</p>
-      </div>
+      <span class="eyebrow">Leistungen</span>
+      <h2>Fünf Gewerke,<br><em>ein Partner.</em></h2>
+      <p class="desc">Ob nur das Bad oder die komplette Wohnung — wir koordinieren sämtliche Gewerke und liefern ein einziges Festpreisangebot. Keine Schnittstellen, keine Verantwortungs-Spielchen.</p>
     </div>
 
     <div class="services-list">
       <a href="kern.html" class="svc fade-up">
         <div class="svc-meta">
-          <span class="svc-no"><strong>01</strong> Komplett</span>
+          <span class="svc-tag">Komplett</span>
           <h3>Kern&shy;sanierung</h3>
           <p class="svc-desc">Wohnung, Haus oder Gewerbe komplett auf den Rohbau zurück und neu aufgebaut — Rückbau, Elektro, Sanitär, Boden, Maler. Alles aus einer Hand.</p>
           <div class="svc-bottom">
@@ -691,7 +696,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 
       <a href="bad.html" class="svc alt fade-up">
         <div class="svc-meta">
-          <span class="svc-no"><strong>02</strong> Bad</span>
+          <span class="svc-tag">Bad</span>
           <h3>Bad&shy;sanierung</h3>
           <p class="svc-desc">Komplettbäder, Walk-in-Duschen, barrierefreie Bäder. Sanitär, Fliesen, Elektrik, Boden und Trockenbau — fertig in 2–4 Wochen.</p>
           <div class="svc-bottom">
@@ -704,7 +709,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 
       <a href="boden.html" class="svc fade-up">
         <div class="svc-meta">
-          <span class="svc-no"><strong>03</strong> Boden</span>
+          <span class="svc-tag">Boden</span>
           <h3>Boden&shy;verlegung</h3>
           <p class="svc-desc">Vinyl, Laminat, Designboden, Parkett oder Fliesen — inkl. Untergrund­vorbereitung, Verlegung und Sockelleisten. Bezugsfertig in 3–7 Tagen.</p>
           <div class="svc-bottom">
@@ -717,7 +722,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 
       <a href="trockenbau.html" class="svc alt fade-up">
         <div class="svc-meta">
-          <span class="svc-no"><strong>04</strong> Trockenbau</span>
+          <span class="svc-tag">Trockenbau</span>
           <h3>Trocken&shy;bau</h3>
           <p class="svc-desc">Wände einziehen, Decken abhängen, Schallschutz, Räume neu schneiden. Sauber, staubarm und meist in 3–10 Werktagen fertig.</p>
           <div class="svc-bottom">
@@ -730,7 +735,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 
       <a href="maler.html" class="svc fade-up">
         <div class="svc-meta">
-          <span class="svc-no"><strong>05</strong> Maler</span>
+          <span class="svc-tag">Maler</span>
           <h3>Maler&shy;arbeiten</h3>
           <p class="svc-desc">Streichen, Tapezieren, Spachteln, Lackieren. Standard-Weiß oder Wunsch­farbe, sauber und schnell — auch nach Trockenbau oder Sanierung.</p>
           <div class="svc-bottom">
@@ -744,7 +749,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
   </div>
 </section>
 
-<!-- INLINE CTA 1 — after Leistungen -->
+<!-- INLINE CTA 1 -->
 <div class="inline-cta">
   <div class="inline-cta-inner">
     <p>Welches Gewerk brauchen Sie? <em>Wir beraten kostenlos.</em></p>
@@ -761,15 +766,13 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
   </div>
 </div>
 
-<!-- PROJECTS GALLERY (moved up) -->
+<!-- PROJECTS GALLERY -->
 <section id="projekte">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>03</strong> <em>Referenzen</em></div>
-      <div>
-        <h2>Beispiel&shy;projekte<br>aus der <em>Region.</em></h2>
-        <p class="desc">Über 430 abgeschlossene Sanierungen in Heidelberg, Mannheim und im Raum Heilbronn. Hier einige unserer letzten Arbeiten.</p>
-      </div>
+      <span class="eyebrow">Referenzen</span>
+      <h2>Beispiel&shy;projekte<br>aus der <em>Region.</em></h2>
+      <p class="desc">Über 430 abgeschlossene Sanierungen in Heidelberg, Mannheim und im Raum Heilbronn. Hier einige unserer letzten Arbeiten.</p>
     </div>
 
     <div class="proj-grid">
@@ -819,7 +822,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
   </div>
 </section>
 
-<!-- INLINE CTA 2 — after Projekte -->
+<!-- INLINE CTA 2 -->
 <div class="inline-cta">
   <div class="inline-cta-inner">
     <p>Ähnliches Projekt <em>geplant?</em></p>
@@ -831,37 +834,31 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section id="warum">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>04</strong> <em>Warum HeinzelMänner</em></div>
-      <div>
-        <h2>Vier Gründe,<br><em>die zählen.</em></h2>
-        <p class="desc">Was uns von anderen Sanierungs­firmen unterscheidet — und was Sie als Auftraggeber davon haben.</p>
-      </div>
+      <span class="eyebrow">Warum HeinzelMänner</span>
+      <h2>Vier Gründe,<br><em>die zählen.</em></h2>
+      <p class="desc">Was uns von anderen Sanierungs­firmen unterscheidet — und was Sie als Auftraggeber davon haben.</p>
     </div>
 
     <div class="usp-grid">
       <div class="usp-item fade-up">
-        <span class="uno">01</span>
         <div>
           <h4>Festpreis nach Vor-Ort-Termin</h4>
           <p>Wir kommen, schauen, rechnen sauber durch — und nennen Ihnen einen verbindlichen Festpreis. Schriftlich. Keine nachträglichen Überraschungen, keine versteckten Positionen.</p>
         </div>
       </div>
       <div class="usp-item fade-up">
-        <span class="uno">02</span>
         <div>
           <h4>Eigenes Handwerker-Team</h4>
           <p>45 fest angestellte Mitarbeiter — Sanitär, Elektrik, Fliesen, Trockenbau, Boden, Maler. Keine wechselnden Subunternehmer, ein einziger Ansprechpartner für alles.</p>
         </div>
       </div>
       <div class="usp-item fade-up">
-        <span class="uno">03</span>
         <div>
           <h4>Persönliche Beratung vor Ort</h4>
           <p>Kein anonymer Online-Kalkulator. Unser Bauleiter kommt zu Ihnen, schaut sich Substanz und Anschlüsse an, hört zu und berät ehrlich — kostenlos und unverbindlich.</p>
         </div>
       </div>
       <div class="usp-item fade-up">
-        <span class="uno">04</span>
         <div>
           <h4>Regional verwurzelt</h4>
           <p>Seit über 22 Jahren in Leimen ansässig. Wir kennen die Region, die Behörden, die Hausverwaltungen, die typische Bausubstanz — kurze Wege, schnelle Termine.</p>
@@ -875,7 +872,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section class="featured" id="projekt">
   <div class="featured-grid">
     <div class="fade-up">
-      <div class="eyebrow" style="color:rgba(255,255,255,0.5); margin-bottom:20px"><strong style="color:var(--accent); font-family:var(--sans); font-weight:600">05</strong> &nbsp;/&nbsp; <em class="italic" style="font-family:var(--display)">Referenzprojekt</em></div>
+      <span class="eyebrow" style="color:rgba(255,255,255,0.5); margin-bottom:20px">Referenzprojekt</span>
       <h2>Altbau&shy;wohnung,<br><em>komplett</em> neu gedacht.</h2>
       <p class="featured-lede">Eine 95 m² Altbauwohnung von 1928 — kernsaniert, modernisiert, energetisch ertüchtigt. Vom Rückbau über Sanitär und Elektro bis zur Schlüsselübergabe in 8 Wochen.</p>
       <div class="featured-facts">
@@ -896,16 +893,14 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section class="calc-section" id="rechner">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>06</strong> <em>Preis-Indikator</em></div>
-      <div>
-        <h2>Was kostet<br><em>meine Sanierung?</em></h2>
-        <p class="desc">Geben Sie uns einen groben Rahmen — der Rechner zeigt Ihnen sofort eine Preisspanne auf Basis typischer Projekte. Den verbindlichen Festpreis erhalten Sie nach kostenloser Vor-Ort-Begehung.</p>
-      </div>
+      <span class="eyebrow">Preis-Indikator</span>
+      <h2>Was kostet<br><em>meine Sanierung?</em></h2>
+      <p class="desc">Geben Sie uns einen groben Rahmen — der Rechner zeigt Ihnen sofort eine Preisspanne auf Basis typischer Projekte. Den verbindlichen Festpreis erhalten Sie nach kostenloser Vor-Ort-Begehung.</p>
     </div>
 
     <div class="calc-wrap">
       <div class="calc-intro fade-up">
-        <h2 style="font-size:clamp(1.6rem, 3vw, 2.2rem); max-width:none; margin-bottom:14px">So funktioniert's:</h2>
+        <h2 style="font-size:1.8rem; max-width:none; margin-bottom:14px">So funktioniert's:</h2>
         <p>Wählen Sie die gewünschte Leistung und geben Sie die Fläche an. Der Rechner zeigt Ihnen eine grobe Preisspanne basierend auf typischen Projekten der letzten 12 Monate in der Region.</p>
         <div class="hint">
           <strong>Wichtig:</strong> Der finale Preis hängt von Material­auswahl, Substanz und Ausführungs­details ab. Den exakten Festpreis erhalten Sie nach Vor-Ort-Termin — kostenlos und unverbindlich.
@@ -968,11 +963,9 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section id="ablauf">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>07</strong> <em>Ablauf</em></div>
-      <div>
-        <h2>Vier Schritte.<br><em>Ein Festpreis.</em></h2>
-        <p class="desc">Transparent, planbar, ohne Überraschungen. Vom ersten Telefonat bis zum übergebenen Projekt — Sie wissen jederzeit, wo wir stehen.</p>
-      </div>
+      <span class="eyebrow">Ablauf</span>
+      <h2>Vier Schritte.<br><em>Ein Festpreis.</em></h2>
+      <p class="desc">Transparent, planbar, ohne Überraschungen. Vom ersten Telefonat bis zum übergebenen Projekt — Sie wissen jederzeit, wo wir stehen.</p>
     </div>
 
     <div class="process-list">
@@ -1016,11 +1009,9 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section id="preise" class="tight" style="background:var(--paper-2)">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>08</strong> <em>Festpreis-Übersicht</em></div>
-      <div>
-        <h2>Preise im<br><em>Überblick.</em></h2>
-        <p class="desc">Unsere Festpreise pro Leistung als Orientierung. Klicken Sie auf eine Position für die detaillierte Beschreibung mit allen enthaltenen Arbeiten.</p>
-      </div>
+      <span class="eyebrow">Festpreis-Übersicht</span>
+      <h2>Preise im<br><em>Überblick.</em></h2>
+      <p class="desc">Unsere Festpreise pro Leistung als Orientierung. Klicken Sie auf eine Position für die detaillierte Beschreibung mit allen enthaltenen Arbeiten.</p>
     </div>
 
     <div class="price-list">
@@ -1053,7 +1044,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
   </div>
 </section>
 
-<!-- INLINE CTA 3 — before FAQ -->
+<!-- INLINE CTA 3 -->
 <div class="inline-cta">
   <div class="inline-cta-inner">
     <p>Jetzt <em>Festpreis sichern</em> — Beratung in 48 Stunden vor Ort.</p>
@@ -1066,11 +1057,9 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section id="faq">
   <div class="wrap">
     <div class="section-head fade-up">
-      <div class="index"><strong>09</strong> <em>Häufige Fragen</em></div>
-      <div>
-        <h2>Bevor Sie<br><em>anrufen.</em></h2>
-        <p class="desc">Die Fragen, die wir am häufigsten gestellt bekommen. Falls Ihre nicht dabei ist, rufen Sie uns einfach an — wir beantworten alles ehrlich und direkt.</p>
-      </div>
+      <span class="eyebrow">Häufige Fragen</span>
+      <h2>Bevor Sie<br><em>anrufen.</em></h2>
+      <p class="desc">Die Fragen, die wir am häufigsten gestellt bekommen. Falls Ihre nicht dabei ist, rufen Sie uns einfach an — wir beantworten alles ehrlich und direkt.</p>
     </div>
 
     <div class="faq-list">
@@ -1114,7 +1103,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section class="lead-form" id="anfrage">
   <div class="lead-form-grid">
     <div class="lf-left fade-up">
-      <div class="eyebrow" style="margin-bottom:20px"><strong style="color:var(--ink); font-weight:600">10</strong> &nbsp;/&nbsp; <em class="italic serif">Beratung</em></div>
+      <span class="eyebrow" style="margin-bottom:20px">Beratung</span>
       <h2>Lassen Sie uns<br><em>kurz sprechen.</em></h2>
       <p>10-Minuten-Telefonat — wir klären die wichtigsten Eckpunkte, vereinbaren den kostenlosen Vor-Ort-Termin und Sie haben binnen 2 Wochen Ihr Festpreis-Angebot.</p>
       <div class="lf-facts">
