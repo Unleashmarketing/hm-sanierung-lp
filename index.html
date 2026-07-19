@@ -8,24 +8,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root{
   --ink:#0A0A0A;
   --ink-soft:#1A1A1A;
-  --muted:#666;
-  --line:#E8E5DD;
-  --line-soft:#F0EDE5;
+  --muted:#555;
+  --muted-light:#888;
+  --line:#E5E3DC;
+  --line-soft:#EDEAE2;
   --paper:#FAFAF7;
   --paper-2:#F4F1E9;
-  --accent:#E66800;
+  --accent:#D86200;
   --accent-soft:#FFF1E2;
-  --dark:#0D0D0D;
-  --dark-soft:#1A1A1A;
-  --max:1320px;
+  --max:1200px;
   --gutter:32px;
-  --ticker-h:40px;
-  --display:'Fraunces', 'Times New Roman', serif;
+  --ticker-h:38px;
   --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -36,552 +34,418 @@ body{
   font-family:var(--sans);
   color:var(--ink);
   background:var(--paper);
-  line-height:1.55;
-  font-size:17px;
+  line-height:1.6;
+  font-size:16px;
   font-weight:400;
   -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
 }
 img{display:block; max-width:100%}
 a{color:inherit; text-decoration:none}
 button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit}
 
-/* ============ TYPE — fixed sizes with breakpoints ============ */
-h1,h2,h3,h4{font-family:var(--display); font-weight:600; color:var(--ink); letter-spacing:-0.025em; line-height:1}
-h1{font-size:4.2rem; font-weight:500; letter-spacing:-0.035em; line-height:0.96}
-h2{font-size:3.2rem; font-weight:500; line-height:1}
-h3{font-size:1.6rem; font-weight:500; line-height:1.1}
-h4{font-size:1.1rem; font-weight:600; line-height:1.2}
-@media(max-width:980px){
-  h1{font-size:3.2rem}
-  h2{font-size:2.6rem}
-}
-@media(max-width:540px){
-  h1{font-size:2.5rem}
-  h2{font-size:2.1rem}
-  h3{font-size:1.35rem}
-}
-.serif{font-family:var(--display)}
-.italic{font-style:italic}
+/* ============ TYPE — one family, clean ============ */
+h1,h2,h3,h4{font-family:var(--sans); color:var(--ink); letter-spacing:-0.03em; line-height:1.08; font-weight:700}
+h1{font-size:clamp(2.2rem, 5.5vw, 4.2rem)}
+h2{font-size:clamp(1.8rem, 4vw, 2.8rem)}
+h3{font-size:clamp(1.15rem, 2vw, 1.5rem); font-weight:600}
+h4{font-size:1.05rem; font-weight:600; line-height:1.3}
 .eyebrow{
   display:inline-block;
-  font-family:var(--sans);
-  font-size:0.74rem;
-  letter-spacing:0.18em;
+  font-size:0.72rem;
+  letter-spacing:0.14em;
   text-transform:uppercase;
-  font-weight:500;
-  color:var(--muted);
+  font-weight:600;
+  color:var(--accent);
+  margin-bottom:14px;
 }
 
 /* ============ LAYOUT ============ */
 .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--gutter)}
 @media(max-width:720px){:root{--gutter:20px}}
-section{padding:100px 0; position:relative}
-@media(max-width:880px){section{padding:72px 0}}
-section.tight{padding:64px 0}
+section{padding:96px 0; position:relative}
+@media(max-width:880px){section{padding:64px 0}}
 
 /* ============ TICKER ============ */
 .top-ticker{
-  position:fixed;
-  top:0; left:0; right:0;
-  z-index:60;
-  background:var(--ink);
-  color:#fff;
-  font-size:0.78rem;
-  letter-spacing:0.05em;
-  padding:11px 0;
-  overflow:hidden;
-  height:var(--ticker-h);
+  position:fixed; top:0; left:0; right:0; z-index:60;
+  background:var(--ink); color:#fff;
+  font-size:0.75rem; letter-spacing:0.04em;
+  padding:10px 0; overflow:hidden; height:var(--ticker-h);
 }
-.ticker-track{display:flex; gap:48px; white-space:nowrap; animation:tickerScroll 50s linear infinite; width:max-content}
-@keyframes tickerScroll{ to{transform:translateX(-50%)} }
-.ticker-item{display:inline-flex; align-items:center; gap:8px; opacity:0.9}
-.ticker-item::after{content:"•"; margin-left:48px; color:var(--accent)}
-.ticker-item span{color:var(--accent); font-weight:600}
+.ticker-track{display:flex; gap:56px; white-space:nowrap; animation:ticker 55s linear infinite; width:max-content}
+@keyframes ticker{to{transform:translateX(-50%)}}
+.ticker-item{display:inline-flex; align-items:center; gap:6px; opacity:0.85}
+.ticker-item::after{content:"·"; margin-left:56px; opacity:0.4}
 
 /* ============ NAV ============ */
 .nav{
-  position:fixed;
-  top:var(--ticker-h); left:0; right:0;
-  z-index:50;
+  position:fixed; top:var(--ticker-h); left:0; right:0; z-index:50;
   padding:14px 0;
-  transition:background 0.3s, padding 0.3s, border-color 0.3s;
-  border-bottom:1px solid transparent;
+  transition:background 0.3s, padding 0.3s, box-shadow 0.3s;
 }
 .nav.scrolled{
-  background:rgba(250,250,247,0.85);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  background:rgba(250,250,247,0.92);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   padding:10px 0;
-  border-bottom-color:var(--line);
+  box-shadow:0 1px 0 var(--line);
 }
 .nav-inner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:24px;
+  max-width:var(--max); margin:0 auto; padding:0 var(--gutter);
+  display:flex; justify-content:space-between; align-items:center; gap:24px;
 }
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-family:var(--display);
-  font-size:1.4rem;
-  font-weight:600;
-  letter-spacing:-0.03em;
-  color:var(--ink);
-}
-.logo-img{height:38px; width:auto}
-.nav-links{display:flex; gap:34px; font-size:0.92rem; font-weight:500}
-.nav-links a{color:var(--ink); position:relative; padding:4px 0}
-.nav-links a::after{
-  content:"";
-  position:absolute;
-  bottom:0; left:0; right:0;
-  height:1.5px;
-  background:var(--accent);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform 0.3s;
-}
-.nav-links a:hover::after{transform:scaleX(1)}
+.logo{display:flex; align-items:center; gap:10px}
+.logo-img{height:36px; width:auto}
+.nav-links{display:flex; gap:32px; font-size:0.88rem; font-weight:500}
+.nav-links a{color:var(--ink); padding:4px 0; transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
 @media(max-width:980px){.nav-links{display:none}}
 .nav-right{display:flex; align-items:center; gap:14px}
 .nav-phone{
-  font-size:0.92rem; font-weight:600;
-  display:flex; align-items:center; gap:6px;
-  color:var(--ink);
+  font-size:0.88rem; font-weight:600;
+  display:flex; align-items:center; gap:6px; color:var(--ink);
 }
 .nav-phone svg{width:14px; height:14px; stroke:var(--accent); stroke-width:2.2; fill:none}
 @media(max-width:720px){.nav-phone span{display:none}}
 
 /* ============ BUTTON ============ */
 .btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:16px 28px;
-  background:var(--ink);
-  color:#fff;
-  font-size:0.95rem;
-  font-weight:600;
-  border-radius:999px;
-  transition:transform 0.2s, background 0.2s;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:14px 26px;
+  background:var(--ink); color:#fff;
+  font-size:0.9rem; font-weight:600;
+  border-radius:10px;
+  transition:background 0.2s, transform 0.15s;
   white-space:nowrap;
 }
-.btn:hover{background:var(--accent); transform:translateY(-2px)}
-.btn-accent{background:var(--accent); color:#fff}
-.btn-accent:hover{background:#C75500}
-.btn-outline{background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--ink)}
-.btn-outline:hover{background:var(--ink); color:#fff; box-shadow:none}
+.btn:hover{background:var(--accent); transform:translateY(-1px)}
+.btn-accent{background:var(--accent)}
+.btn-accent:hover{background:#B85200}
+.btn-outline{background:transparent; color:var(--ink); border:1.5px solid var(--line)}
+.btn-outline:hover{border-color:var(--ink); background:var(--ink); color:#fff}
 .btn-light{background:#fff; color:var(--ink)}
 .btn-light:hover{background:var(--accent); color:#fff}
-.btn-lg{padding:20px 36px; font-size:1.02rem}
-.btn svg{width:16px; height:16px; transition:transform 0.2s}
-.btn:hover svg{transform:translateX(4px)}
+.btn-lg{padding:16px 32px; font-size:0.95rem}
+.btn svg{width:15px; height:15px}
 .btn-block{width:100%; justify-content:center}
 
 /* ============ HERO ============ */
 .hero{
   padding:calc(var(--ticker-h) + 80px) 0 48px;
-  position:relative;
-  overflow:hidden;
   background:var(--paper);
 }
 .hero-grid{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:grid;
-  grid-template-columns:1.15fr 1fr;
-  gap:40px;
-  align-items:center;
-  position:relative;
-  z-index:2;
+  max-width:var(--max); margin:0 auto; padding:0 var(--gutter);
+  display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:center;
 }
 @media(max-width:980px){
-  .hero{padding:calc(var(--ticker-h) + 80px) 0 40px}
+  .hero{padding:calc(var(--ticker-h) + 72px) 0 36px}
   .hero-grid{grid-template-columns:1fr; gap:28px}
 }
-.hero-eyebrow{
-  display:inline-flex; align-items:center; gap:10px;
-  margin-bottom:20px;
-}
-.hero-eyebrow .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1; transform:scale(1)}50%{opacity:0.5; transform:scale(0.7)}}
-.hero-eyebrow span{font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:500; color:var(--muted)}
-.hero h1{margin-bottom:24px}
-.hero h1 em{font-style:italic; font-weight:300; color:var(--ink)}
-.hero h1 .accent{color:var(--accent); font-weight:600}
-.hero-lede{font-size:1.05rem; color:var(--muted); line-height:1.55; max-width:52ch; margin-bottom:24px}
+.hero h1{margin-bottom:20px; max-width:16ch}
+.hero-lede{font-size:1.02rem; color:var(--muted); line-height:1.6; max-width:48ch; margin-bottom:28px}
 .hero-lede strong{color:var(--ink); font-weight:600}
-.hero-actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+.hero-actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
 
+/* Hero image */
 .hero-visual{
   position:relative;
   aspect-ratio:4/5;
   max-height:520px;
-  border-radius:18px;
+  border-radius:14px;
   overflow:hidden;
   background:#222;
 }
-@media(max-width:980px){
-  .hero-visual{aspect-ratio:16/10; max-height:380px}
-}
+@media(max-width:980px){.hero-visual{aspect-ratio:16/10; max-height:380px}}
 .hero-visual img{width:100%; height:100%; object-fit:cover}
 .hero-visual::after{
-  content:"";
-  position:absolute; inset:0;
-  background:linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.35) 100%);
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 30%, transparent 55%, rgba(0,0,0,0.4) 100%);
   pointer-events:none;
 }
-.hero-visual-caption{
-  position:absolute;
-  bottom:20px; left:20px; right:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:12px;
-  z-index:2;
-  color:#fff;
+/* Cycling caption */
+.hero-caption-tag{
+  position:absolute; top:16px; left:16px; z-index:2;
+  background:rgba(255,255,255,0.15); backdrop-filter:blur(10px);
+  padding:6px 14px; border-radius:8px;
+  font-size:0.7rem; font-weight:600; letter-spacing:0.08em;
+  text-transform:uppercase; color:#fff;
 }
-.hero-visual-caption .vc-loc{font-family:var(--display); font-style:italic; font-size:1.15rem; font-weight:400; line-height:1.1}
-.hero-visual-caption .vc-loc-sub{font-size:0.75rem; opacity:0.8; margin-top:3px}
-.hero-visual-caption .vc-tag{
-  background:rgba(255,255,255,0.16);
-  backdrop-filter:blur(10px);
-  padding:6px 12px;
-  border-radius:999px;
-  font-size:0.7rem;
-  font-weight:500;
-  letter-spacing:0.06em;
-  text-transform:uppercase;
+.hero-caption{
+  position:absolute; bottom:16px; left:16px; right:16px; z-index:2; color:#fff;
 }
+.hero-slide{
+  opacity:0; transform:translateY(6px);
+  transition:opacity 0.5s, transform 0.5s;
+  position:absolute; bottom:0; left:0; right:0;
+}
+.hero-slide.active{opacity:1; transform:translateY(0); position:relative}
+.hero-slide .hs-title{font-size:1rem; font-weight:600; margin-bottom:3px}
+.hero-slide .hs-sub{font-size:0.78rem; opacity:0.8}
+/* Dots */
+.hero-dots{
+  display:flex; gap:6px; margin-top:10px;
+}
+.hero-dot{
+  width:6px; height:6px; border-radius:50%;
+  background:rgba(255,255,255,0.35);
+  transition:background 0.3s, width 0.3s;
+}
+.hero-dot.active{background:#fff; width:18px; border-radius:3px}
 
 /* ============ STATS ============ */
-.stats{
-  background:var(--ink);
-  color:#fff;
-  padding:64px 0;
-}
+.stats{background:var(--ink); color:#fff; padding:56px 0}
 .stats-inner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:40px;
+  max-width:var(--max); margin:0 auto; padding:0 var(--gutter);
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:32px;
 }
-@media(max-width:540px){.stats-inner{grid-template-columns:1fr; gap:28px; text-align:center}}
-.stat .num{
-  font-family:var(--display);
-  font-size:3.6rem;
-  font-weight:400;
-  line-height:1;
-  letter-spacing:-0.04em;
-  margin-bottom:10px;
-  color:#fff;
-}
-@media(max-width:540px){.stat .num{font-size:2.8rem}}
-.stat .num em{font-style:italic; color:var(--accent); font-weight:400}
-.stat .lbl{font-size:0.85rem; color:rgba(255,255,255,0.55); font-weight:500; letter-spacing:0.04em; line-height:1.4}
+@media(max-width:540px){.stats-inner{grid-template-columns:1fr; gap:24px; text-align:center}}
+.stat .num{font-size:clamp(2.4rem, 4.5vw, 3.4rem); font-weight:800; line-height:1; letter-spacing:-0.04em; margin-bottom:8px}
+.stat .num span{color:var(--accent); font-weight:400}
+.stat .lbl{font-size:0.82rem; color:rgba(255,255,255,0.5); font-weight:500; line-height:1.4}
 
-/* ============ SECTION HEAD — simplified, no index ============ */
-.section-head{
-  margin-bottom:64px;
-  max-width:680px;
-}
-.section-head .eyebrow{margin-bottom:16px}
-.section-head h2{margin-bottom:16px}
-.section-head h2 em{font-style:italic; color:var(--accent); font-weight:400}
-.section-head .desc{font-size:1.02rem; color:var(--muted); line-height:1.55; max-width:52ch}
+/* ============ SECTION HEAD (simple) ============ */
+.sh{margin-bottom:56px; max-width:640px}
+.sh h2{margin-bottom:14px}
+.sh p{font-size:1rem; color:var(--muted); line-height:1.6; max-width:52ch}
 
-/* ============ SERVICES ============ */
-.services-list{display:flex; flex-direction:column; gap:0}
-.svc{
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  gap:56px;
-  padding:48px 0;
-  border-top:1px solid var(--line);
-  align-items:center;
+/* ============ SERVICES — 3 cards grid ============ */
+.svc-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
 }
-.svc:last-child{border-bottom:1px solid var(--line)}
-@media(max-width:880px){.svc{grid-template-columns:1fr; gap:28px; padding:40px 0}}
-.svc-meta{display:flex; flex-direction:column; gap:20px}
-.svc-tag{
-  display:inline-block;
-  font-size:0.72rem;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  font-weight:600;
-  color:var(--accent);
-  background:var(--accent-soft);
-  padding:5px 12px;
-  border-radius:999px;
-  width:fit-content;
+@media(max-width:880px){.svc-grid{grid-template-columns:1fr; gap:16px}}
+.svc-card{
+  border:1px solid var(--line); border-radius:14px;
+  overflow:hidden; background:#fff;
+  transition:border-color 0.2s, box-shadow 0.2s;
 }
-.svc h3{font-size:2.6rem; font-weight:400; letter-spacing:-0.03em; line-height:0.98}
-.svc h3 em{font-style:italic; font-weight:300}
-@media(max-width:980px){.svc h3{font-size:2.2rem}}
-@media(max-width:540px){.svc h3{font-size:1.8rem}}
-.svc-desc{font-size:1rem; color:var(--muted); line-height:1.6; max-width:42ch}
-.svc-bottom{display:flex; justify-content:space-between; align-items:end; gap:24px; margin-top:12px}
-.svc-price{font-size:0.82rem; color:var(--muted); letter-spacing:0.04em; text-transform:uppercase; font-weight:500}
-.svc-price strong{display:block; font-family:var(--display); font-size:1.55rem; color:var(--ink); margin-top:6px; font-weight:500; letter-spacing:-0.02em; text-transform:none}
-.svc-link{font-size:0.92rem; font-weight:600; display:inline-flex; align-items:center; gap:8px; color:var(--ink); white-space:nowrap}
-.svc-link svg{width:14px; height:14px; transition:transform 0.2s}
-.svc:hover .svc-link svg{transform:translateX(6px)}
-.svc-img{aspect-ratio:5/4; border-radius:16px; overflow:hidden; background:var(--line-soft); position:relative}
-.svc-img img{width:100%; height:100%; object-fit:cover; transition:transform 0.8s cubic-bezier(.16,1,.3,1)}
-.svc:hover .svc-img img{transform:scale(1.04)}
-.svc.alt{grid-template-columns:1.2fr 1fr}
-@media(max-width:880px){.svc.alt{grid-template-columns:1fr}}
-.svc.alt .svc-img{order:-1}
-@media(max-width:880px){.svc.alt .svc-img{order:0}}
+.svc-card:hover{border-color:var(--accent); box-shadow:0 8px 32px rgba(0,0,0,0.06)}
+.svc-card-img{aspect-ratio:3/2; overflow:hidden; background:var(--line-soft)}
+.svc-card-img img{width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(.16,1,.3,1)}
+.svc-card:hover .svc-card-img img{transform:scale(1.04)}
+.svc-card-body{padding:24px}
+.svc-card-body h3{margin-bottom:10px}
+.svc-card-body p{font-size:0.92rem; color:var(--muted); line-height:1.55; margin-bottom:16px}
+.svc-price-tag{
+  display:inline-block; font-size:0.78rem; font-weight:600;
+  color:var(--accent); background:var(--accent-soft);
+  padding:5px 12px; border-radius:6px;
+}
 
-/* ============ INLINE CTA BANNER ============ */
+/* ============ INLINE CTA ============ */
 .inline-cta{
-  background:var(--accent);
-  padding:48px 0;
-  text-align:center;
+  background:var(--ink); padding:40px 0; text-align:center;
 }
 .inline-cta-inner{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:0 var(--gutter);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:32px;
-  flex-wrap:wrap;
+  max-width:var(--max); margin:0 auto; padding:0 var(--gutter);
+  display:flex; align-items:center; justify-content:center; gap:24px; flex-wrap:wrap;
 }
-.inline-cta p{
-  font-family:var(--display);
-  font-size:1.6rem;
-  font-weight:500;
-  color:#fff;
-  letter-spacing:-0.02em;
+.inline-cta p{font-size:clamp(1rem, 2vw, 1.25rem); font-weight:500; color:#fff}
+.inline-cta .btn{background:var(--accent)}
+.inline-cta .btn:hover{background:#B85200}
+.inline-cta .btn-outline{background:transparent; border:1.5px solid rgba(255,255,255,0.3); color:#fff}
+.inline-cta .btn-outline:hover{background:#fff; color:var(--ink); border-color:#fff}
+
+/* ============ PROJECTS GALLERY ============ */
+.proj-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
+@media(max-width:880px){.proj-grid{grid-template-columns:repeat(2, 1fr)}}
+@media(max-width:540px){.proj-grid{grid-template-columns:1fr}}
+.proj-card{
+  position:relative; border-radius:12px; overflow:hidden;
+  aspect-ratio:4/3; background:var(--line);
+  transition:transform 0.3s;
 }
-@media(max-width:540px){.inline-cta p{font-size:1.3rem}}
-.inline-cta p em{font-style:italic; font-weight:300}
-.inline-cta .btn{background:#fff; color:var(--ink)}
-.inline-cta .btn:hover{background:var(--ink); color:#fff}
+.proj-card:hover{transform:translateY(-3px)}
+.proj-card.wide{grid-column:span 2}
+@media(max-width:540px){.proj-card.wide{grid-column:span 1}}
+.proj-card img{width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(.16,1,.3,1)}
+.proj-card:hover img{transform:scale(1.04)}
+.proj-card .pmeta{
+  position:absolute; bottom:0; left:0; right:0; padding:16px;
+  background:linear-gradient(transparent, rgba(0,0,0,0.65)); color:#fff;
+}
+.proj-card .ptag{
+  display:inline-block; font-size:0.65rem; letter-spacing:0.08em;
+  text-transform:uppercase; font-weight:600;
+  background:rgba(255,255,255,0.18); backdrop-filter:blur(6px);
+  padding:4px 10px; border-radius:6px; margin-bottom:6px;
+}
+.proj-card .pname{font-size:0.92rem; font-weight:600}
 
 /* ============ USP ============ */
 .usp-grid{
-  display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:0;
-  border-top:1px solid var(--line);
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
 }
-@media(max-width:880px){.usp-grid{grid-template-columns:1fr}}
-.usp-item{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  padding:36px 40px 36px 0;
-  border-bottom:1px solid var(--line);
+@media(max-width:720px){.usp-grid{grid-template-columns:1fr}}
+.usp-card{
+  padding:28px; border:1px solid var(--line); border-radius:14px;
+  background:#fff;
 }
-.usp-item:nth-child(odd){padding-right:40px; border-right:1px solid var(--line)}
-.usp-item:nth-child(even){padding-left:40px}
-@media(max-width:880px){
-  .usp-item:nth-child(odd){border-right:none; padding-right:0}
-  .usp-item:nth-child(even){padding-left:0}
-}
-.usp-item h4{font-family:var(--display); font-size:1.35rem; font-weight:500; letter-spacing:-0.02em; line-height:1.15; color:var(--ink)}
-.usp-item p{font-size:0.94rem; color:var(--muted); line-height:1.55; margin:0; max-width:46ch}
+.usp-card h4{margin-bottom:8px}
+.usp-card p{font-size:0.92rem; color:var(--muted); line-height:1.55}
 
 /* ============ CALCULATOR ============ */
-.calc-section{background:var(--paper-2); padding:100px 0}
-@media(max-width:720px){.calc-section{padding:72px 0}}
-.calc-wrap{display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:start}
-@media(max-width:880px){.calc-wrap{grid-template-columns:1fr; gap:40px}}
-.calc-intro h2{margin-bottom:18px}
-.calc-intro h2 em{font-style:italic; color:var(--accent); font-weight:400}
-.calc-intro p{font-size:1.02rem; color:var(--muted); max-width:42ch; line-height:1.6; margin-bottom:14px}
-.calc-intro .hint{font-size:0.88rem; color:var(--muted); padding:16px 18px; background:rgba(0,0,0,0.04); border-radius:12px; margin-top:20px}
+.calc-section{background:var(--paper-2); padding:96px 0}
+@media(max-width:720px){.calc-section{padding:64px 0}}
+.calc-wrap{display:grid; grid-template-columns:1fr 1.1fr; gap:48px; align-items:start}
+@media(max-width:880px){.calc-wrap{grid-template-columns:1fr; gap:36px}}
+.calc-intro p{font-size:0.98rem; color:var(--muted); max-width:42ch; line-height:1.6; margin-bottom:14px}
+.calc-intro .hint{font-size:0.86rem; color:var(--muted); padding:14px 16px; background:rgba(0,0,0,0.04); border-radius:10px; margin-top:18px}
 .calc-intro .hint strong{color:var(--ink); font-weight:600}
-.calc-card{background:#fff; border-radius:18px; padding:36px; border:1px solid var(--line)}
-@media(max-width:720px){.calc-card{padding:24px}}
-.calc-card .clbl{display:block; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; color:var(--muted); margin-bottom:12px}
-.calc-types{display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:24px}
+.calc-card{background:#fff; border-radius:14px; padding:32px; border:1px solid var(--line)}
+@media(max-width:720px){.calc-card{padding:22px}}
+.calc-card .clbl{display:block; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; color:var(--muted-light); margin-bottom:12px}
+.calc-types{display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-bottom:22px}
 @media(max-width:540px){.calc-types{grid-template-columns:repeat(2, 1fr)}}
-.calc-type{display:flex; flex-direction:column; align-items:center; gap:8px; padding:14px 8px; border:1.5px solid var(--line); border-radius:10px; cursor:pointer; background:#fff; transition:border-color 0.15s, background 0.15s; position:relative; text-align:center}
+.calc-type{display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 8px; border:1.5px solid var(--line); border-radius:10px; cursor:pointer; background:#fff; transition:border-color 0.15s, background 0.15s; position:relative; text-align:center}
 .calc-type input{position:absolute; opacity:0; pointer-events:none}
 .calc-type:hover{border-color:var(--ink)}
 .calc-type.active{border-color:var(--accent); background:var(--accent-soft)}
-.calc-type svg{width:22px; height:22px; stroke:var(--ink); stroke-width:1.6; fill:none}
+.calc-type svg{width:20px; height:20px; stroke:var(--ink); stroke-width:1.6; fill:none}
 .calc-type.active svg{stroke:var(--accent)}
-.calc-type span{font-size:0.84rem; font-weight:600; color:var(--ink)}
-.calc-slider-wrap{margin-bottom:20px}
-.calc-slider-wrap label{display:flex; justify-content:space-between; align-items:baseline; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; color:var(--muted); margin-bottom:10px}
-.calc-slider-wrap label .val{font-family:var(--display); font-size:1.4rem; font-weight:500; color:var(--accent); letter-spacing:-0.02em; text-transform:none}
+.calc-type span{font-size:0.8rem; font-weight:600; color:var(--ink)}
+.calc-slider-wrap{margin-bottom:18px}
+.calc-slider-wrap label{display:flex; justify-content:space-between; align-items:baseline; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; color:var(--muted-light); margin-bottom:10px}
+.calc-slider-wrap label .val{font-size:1.2rem; font-weight:700; color:var(--accent); letter-spacing:-0.02em; text-transform:none}
 .calc-slider-wrap input[type=range]{width:100%; accent-color:var(--accent); cursor:pointer}
-.calc-result{background:var(--ink); color:#fff; border-radius:14px; padding:24px; text-align:center; margin-bottom:16px}
-.calc-result .l{font-size:0.74rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,0.55); margin-bottom:8px}
-.calc-result .r{font-family:var(--display); font-size:2rem; font-weight:500; letter-spacing:-0.025em; line-height:1.1}
-@media(max-width:540px){.calc-result .r{font-size:1.6rem}}
+.calc-result{background:var(--ink); color:#fff; border-radius:12px; padding:22px; text-align:center; margin-bottom:14px}
+.calc-result .l{font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,0.5); margin-bottom:6px}
+.calc-result .r{font-size:clamp(1.4rem, 2.5vw, 2rem); font-weight:700; letter-spacing:-0.02em; line-height:1.1}
 .calc-result .r .sep{color:var(--accent); margin:0 4px}
-.calc-result .d{font-size:0.78rem; color:rgba(255,255,255,0.55); margin-top:8px}
+.calc-result .d{font-size:0.75rem; color:rgba(255,255,255,0.5); margin-top:6px}
 
-/* ============ PROJECTS GALLERY ============ */
-.proj-grid{display:grid; grid-template-columns:repeat(6, 1fr); gap:20px}
-@media(max-width:980px){.proj-grid{grid-template-columns:repeat(2, 1fr)}}
-@media(max-width:540px){.proj-grid{grid-template-columns:1fr}}
-.proj-card{position:relative; border-radius:14px; overflow:hidden; cursor:pointer; background:var(--line); transition:transform 0.4s cubic-bezier(.16,1,.3,1)}
-.proj-card:hover{transform:translateY(-4px)}
-.proj-card.lg{grid-column:span 4; aspect-ratio:16/10}
-.proj-card.md{grid-column:span 2; aspect-ratio:1}
-.proj-card.tall{grid-column:span 2; aspect-ratio:3/4}
-.proj-card.wide{grid-column:span 4; aspect-ratio:21/9}
-@media(max-width:980px){.proj-card.lg,.proj-card.md,.proj-card.tall,.proj-card.wide{grid-column:span 2; aspect-ratio:4/3}}
-@media(max-width:540px){.proj-card.lg,.proj-card.md,.proj-card.tall,.proj-card.wide{grid-column:span 1}}
-.proj-card img{width:100%; height:100%; object-fit:cover; transition:transform 0.8s cubic-bezier(.16,1,.3,1)}
-.proj-card:hover img{transform:scale(1.05)}
-.proj-card .pmeta{position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.7) 100%); color:#fff}
-.proj-card .ptag{display:inline-block; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); padding:5px 11px; border-radius:999px; margin-bottom:8px}
-.proj-card .pname{font-family:var(--display); font-size:1.1rem; font-weight:500; font-style:italic; letter-spacing:-0.01em; line-height:1.15}
-.proj-card.lg .pname, .proj-card.wide .pname{font-size:1.35rem}
+/* ============ PROCESS — visual steps ============ */
+.process-grid{
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
+  position:relative;
+}
+@media(max-width:880px){.process-grid{grid-template-columns:repeat(2, 1fr); gap:20px}}
+@media(max-width:540px){.process-grid{grid-template-columns:1fr}}
+/* connecting line */
+.process-grid::before{
+  content:""; position:absolute;
+  top:40px; left:calc(12.5% + 16px); right:calc(12.5% + 16px);
+  height:2px; background:var(--line);
+}
+@media(max-width:880px){.process-grid::before{display:none}}
+.step{text-align:center; padding:0 16px; position:relative}
+.step-num{
+  width:56px; height:56px; border-radius:50%;
+  background:var(--ink); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem; font-weight:800;
+  margin:0 auto 18px; position:relative; z-index:2;
+}
+.step-num svg{width:24px; height:24px; stroke:#fff; stroke-width:2; fill:none}
+.step h4{margin-bottom:6px; font-size:1rem}
+.step p{font-size:0.86rem; color:var(--muted); line-height:1.5}
+.step .step-time{font-size:0.72rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.06em; margin-top:10px}
+
+/* ============ PRICING ============ */
+.price-list{display:flex; flex-direction:column; border-top:1px solid var(--line)}
+.price-row{
+  display:grid; grid-template-columns:1fr auto; gap:32px;
+  padding:22px 0; border-bottom:1px solid var(--line); align-items:center;
+}
+@media(max-width:720px){.price-row{grid-template-columns:1fr; gap:4px}}
+.price-name{font-size:1.05rem; font-weight:600; display:flex; align-items:baseline; gap:10px}
+.price-name span{font-weight:400; color:var(--muted); font-size:0.88rem}
+.price-amt{font-size:1.15rem; font-weight:700; letter-spacing:-0.02em; white-space:nowrap}
 
 /* ============ FAQ ============ */
 .faq-list{display:flex; flex-direction:column; border-top:1px solid var(--line)}
 .faq-item{border-bottom:1px solid var(--line)}
-.faq-item summary{list-style:none; cursor:pointer; padding:24px 0; display:flex; justify-content:space-between; align-items:center; gap:24px; font-family:var(--display); font-size:1.3rem; font-weight:500; letter-spacing:-0.02em; color:var(--ink); transition:padding 0.2s}
-@media(max-width:540px){.faq-item summary{font-size:1.15rem}}
+.faq-item summary{
+  list-style:none; cursor:pointer; padding:20px 0;
+  display:flex; justify-content:space-between; align-items:center; gap:20px;
+  font-size:1.02rem; font-weight:600; color:var(--ink); transition:color 0.2s;
+}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary:hover{padding-left:12px}
-.faq-item summary::after{content:""; width:34px; height:34px; border:1.5px solid var(--ink); border-radius:50%; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='2' stroke-linecap='round'><path d='M12 5v14M5 12h14'/></svg>"); background-size:14px; background-repeat:no-repeat; background-position:center; flex-shrink:0; transition:transform 0.3s, background-color 0.2s, border-color 0.2s}
-.faq-item[open] summary::after{transform:rotate(45deg); background-color:var(--accent); border-color:var(--accent); background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'><path d='M12 5v14M5 12h14'/></svg>")}
-.faq-item .ans{padding:0 60px 28px 0; color:var(--muted); font-size:1rem; line-height:1.65; max-width:74ch}
+.faq-item summary:hover{color:var(--accent)}
+.faq-item summary::after{
+  content:"+"; font-size:1.4rem; font-weight:300; color:var(--muted);
+  width:32px; height:32px; border:1px solid var(--line); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:all 0.2s;
+}
+.faq-item[open] summary::after{content:"−"; background:var(--accent); color:#fff; border-color:var(--accent)}
+.faq-item .ans{padding:0 48px 20px 0; color:var(--muted); font-size:0.94rem; line-height:1.65; max-width:68ch}
 @media(max-width:720px){.faq-item .ans{padding-right:0}}
 
-/* ============ MARQUEE ============ */
-.marquee{background:var(--paper); padding:24px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden}
-.marquee-track{display:flex; gap:48px; white-space:nowrap; font-family:var(--display); font-size:1.5rem; font-weight:400; font-style:italic; letter-spacing:-0.02em; color:var(--ink); animation:tickerScroll 60s linear infinite; width:max-content}
-@media(max-width:540px){.marquee-track{font-size:1.2rem}}
-.marquee-track span{display:inline-flex; align-items:center; gap:48px}
-.marquee-track span::after{content:"✦"; color:var(--accent); font-style:normal; font-size:0.7em}
-
-/* ============ FEATURED PROJECT ============ */
-.featured{background:var(--ink); color:#fff; padding:100px 0; overflow:hidden}
-.featured-grid{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:grid; grid-template-columns:1fr 1.4fr; gap:56px; align-items:center}
-@media(max-width:880px){.featured-grid{grid-template-columns:1fr; gap:40px}}
-.featured .eyebrow{color:rgba(255,255,255,0.5); margin-bottom:20px}
-.featured h2{color:#fff; margin-bottom:24px}
-.featured h2 em{font-style:italic; font-weight:300; color:#fff}
-.featured h2 .accent{color:var(--accent); font-weight:400}
-.featured-lede{font-size:1.02rem; color:rgba(255,255,255,0.65); line-height:1.6; max-width:42ch; margin-bottom:28px}
-.featured-facts{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; max-width:380px}
-.featured-fact .lbl{font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:4px; font-weight:500}
-.featured-fact .val{font-family:var(--display); font-size:1.4rem; color:#fff; font-weight:500; letter-spacing:-0.02em}
-.featured-img{aspect-ratio:4/3; border-radius:16px; overflow:hidden; background:#222; position:relative}
-.featured-img img{width:100%; height:100%; object-fit:cover}
-
-/* ============ PROCESS ============ */
-.process-list{display:flex; flex-direction:column; gap:0}
-.process-row{display:grid; grid-template-columns:auto 1fr auto; gap:56px; padding:36px 0; border-top:1px solid var(--line); align-items:center; transition:background 0.2s, padding 0.2s}
-.process-row:last-child{border-bottom:1px solid var(--line)}
-.process-row:hover{padding-left:20px; padding-right:20px}
-@media(max-width:880px){.process-row{grid-template-columns:auto 1fr; gap:20px}}
-.process-row .pno{font-family:var(--display); font-size:3.2rem; font-weight:300; line-height:1; letter-spacing:-0.04em; color:var(--accent); font-style:italic; min-width:72px}
-@media(max-width:540px){.process-row .pno{font-size:2.6rem}}
-.process-row h4{font-family:var(--display); font-size:1.7rem; font-weight:400; letter-spacing:-0.02em; margin-bottom:6px}
-@media(max-width:540px){.process-row h4{font-size:1.4rem}}
-.process-row p{font-size:0.98rem; color:var(--muted); max-width:54ch; line-height:1.55}
-.process-row .pdur{font-size:0.82rem; color:var(--muted); letter-spacing:0.04em; text-transform:uppercase; font-weight:500; text-align:right; white-space:nowrap}
-@media(max-width:880px){.process-row .pdur{grid-column:span 2; text-align:left; margin-top:6px}}
-
-/* ============ PRICING ============ */
-.price-list{display:flex; flex-direction:column; border-top:1px solid var(--line)}
-.price-row{display:grid; grid-template-columns:1fr auto auto; gap:40px; padding:28px 0; border-bottom:1px solid var(--line); align-items:baseline; transition:padding 0.2s}
-.price-row:hover{padding-left:16px}
-@media(max-width:720px){.price-row{grid-template-columns:1fr; gap:6px; padding:24px 0}}
-.price-name{font-family:var(--display); font-size:1.55rem; font-weight:400; letter-spacing:-0.02em; display:flex; align-items:baseline; gap:16px}
-@media(max-width:540px){.price-name{font-size:1.3rem}}
-.price-name em{font-style:italic; color:var(--muted); font-weight:300; font-size:0.7em}
-.price-amt{font-family:var(--display); font-size:1.45rem; font-weight:500; letter-spacing:-0.02em}
-.price-amt em{font-style:italic; font-size:0.7em; font-weight:400; color:var(--muted); margin-right:6px}
-.price-link{font-size:0.88rem; color:var(--muted); display:inline-flex; align-items:center; gap:6px}
-.price-link:hover{color:var(--accent)}
-.price-link svg{width:13px; height:13px; transition:transform 0.2s}
-.price-link:hover svg{transform:translateX(4px)}
-
 /* ============ CTA ============ */
-.cta{background:var(--ink); color:#fff; padding:100px 0; position:relative; overflow:hidden}
-@media(max-width:720px){.cta{padding:72px 0}}
-.cta::before{content:""; position:absolute; top:-200px; right:-200px; width:600px; height:600px; background:radial-gradient(circle, rgba(230,104,0,0.18), transparent 70%); pointer-events:none}
-.cta-inner{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); position:relative}
-.cta-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:end}
-@media(max-width:880px){.cta-grid{grid-template-columns:1fr; gap:36px}}
-.cta h2{color:#fff; font-size:3.8rem; font-weight:400; letter-spacing:-0.035em; max-width:14ch}
-@media(max-width:980px){.cta h2{font-size:3rem}}
-@media(max-width:540px){.cta h2{font-size:2.4rem}}
-.cta h2 em{font-style:italic; color:var(--accent); font-weight:300}
-.cta-right{display:flex; flex-direction:column; gap:20px}
-.cta-points{display:flex; flex-direction:column; gap:12px; margin-bottom:6px}
-.cta-points li{list-style:none; display:flex; gap:12px; align-items:flex-start; font-size:0.96rem; color:rgba(255,255,255,0.85)}
-.cta-points svg{width:18px; height:18px; stroke:var(--accent); stroke-width:2.5; fill:none; flex-shrink:0; margin-top:3px}
-.cta-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:12px}
+.cta{background:var(--ink); color:#fff; padding:96px 0; position:relative; overflow:hidden}
+@media(max-width:720px){.cta{padding:64px 0}}
+.cta-inner{max-width:var(--max); margin:0 auto; padding:0 var(--gutter)}
+.cta-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end}
+@media(max-width:880px){.cta-grid{grid-template-columns:1fr; gap:32px}}
+.cta h2{color:#fff; max-width:14ch}
+.cta-right{display:flex; flex-direction:column; gap:18px}
+.cta-points{display:flex; flex-direction:column; gap:10px; margin-bottom:4px}
+.cta-points li{list-style:none; display:flex; gap:10px; align-items:flex-start; font-size:0.92rem; color:rgba(255,255,255,0.8)}
+.cta-points svg{width:16px; height:16px; stroke:var(--accent); stroke-width:2.5; fill:none; flex-shrink:0; margin-top:3px}
+.cta-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
 
 /* ============ LEAD FORM ============ */
-.lead-form{background:var(--paper); padding:100px 0; border-top:1px solid var(--line)}
-@media(max-width:720px){.lead-form{padding:72px 0}}
-.lead-form-grid{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:grid; grid-template-columns:1fr 1.1fr; gap:56px; align-items:start}
-@media(max-width:880px){.lead-form-grid{grid-template-columns:1fr; gap:40px}}
-.lf-left h2{margin-bottom:18px}
-.lf-left h2 em{font-style:italic; color:var(--accent); font-weight:400}
-.lf-left p{font-size:1.02rem; color:var(--muted); max-width:42ch; line-height:1.6; margin-bottom:24px}
-.lf-facts{display:flex; flex-direction:column; gap:14px; padding-top:20px; border-top:1px solid var(--line)}
-.lf-fact{display:flex; gap:12px; align-items:flex-start}
-.lf-fact .ico{width:30px; height:30px; border-radius:50%; background:var(--accent-soft); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0}
-.lf-fact .ico svg{width:13px; height:13px; stroke:var(--accent); stroke-width:2.5; fill:none}
-.lf-fact strong{display:block; font-weight:600; margin-bottom:2px}
-.lf-fact span{color:var(--muted); font-size:0.9rem}
-.form{background:#fff; border:1px solid var(--line); border-radius:18px; padding:36px}
-@media(max-width:720px){.form{padding:24px}}
-.form-head{margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--line)}
-.form-head h3{font-size:1.45rem; margin-bottom:4px}
-.form-head .sub{font-size:0.88rem; color:var(--muted)}
+.lead-form{background:var(--paper); padding:96px 0; border-top:1px solid var(--line)}
+@media(max-width:720px){.lead-form{padding:64px 0}}
+.lead-form-grid{
+  max-width:var(--max); margin:0 auto; padding:0 var(--gutter);
+  display:grid; grid-template-columns:1fr 1.1fr; gap:48px; align-items:start;
+}
+@media(max-width:880px){.lead-form-grid{grid-template-columns:1fr; gap:36px}}
+.lf-left h2{margin-bottom:14px}
+.lf-left>p{font-size:0.98rem; color:var(--muted); max-width:42ch; line-height:1.6; margin-bottom:24px}
+.lf-facts{display:flex; flex-direction:column; gap:12px; padding-top:20px; border-top:1px solid var(--line)}
+.lf-fact{display:flex; gap:10px; align-items:center; font-size:0.9rem}
+.lf-fact svg{width:16px; height:16px; stroke:var(--accent); stroke-width:2.5; fill:none; flex-shrink:0}
+.lf-fact strong{font-weight:600}
+.form{background:#fff; border:1px solid var(--line); border-radius:14px; padding:32px}
+@media(max-width:720px){.form{padding:22px}}
+.form-head{margin-bottom:20px; padding-bottom:18px; border-bottom:1px solid var(--line)}
+.form-head h3{font-size:1.3rem; margin-bottom:3px}
+.form-head .sub{font-size:0.84rem; color:var(--muted)}
 .field{margin-bottom:12px}
-.field label{display:block; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; color:var(--muted); margin-bottom:6px}
-.field input,.field select,.field textarea{width:100%; padding:13px 15px; border:1px solid var(--line); border-radius:10px; font-family:inherit; font-size:0.96rem; background:var(--paper); transition:border-color 0.2s, background 0.2s}
+.field label{display:block; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; color:var(--muted-light); margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:0.92rem; background:var(--paper); transition:border-color 0.2s}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none; border-color:var(--ink); background:#fff}
 .field-row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
 .form button[type=submit]{margin-top:6px}
-.form-note{font-size:0.78rem; color:var(--muted); text-align:center; margin-top:10px; display:flex; align-items:center; justify-content:center; gap:6px}
-.form-note svg{width:13px; height:13px; stroke:var(--muted); stroke-width:2; fill:none}
+.form-note{font-size:0.75rem; color:var(--muted-light); text-align:center; margin-top:10px}
 
 /* ============ FOOTER ============ */
-footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; font-size:0.92rem}
-.f-top{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.1)}
-@media(max-width:880px){.f-top{grid-template-columns:1fr 1fr; gap:28px}}
+footer{background:var(--ink); color:rgba(255,255,255,0.55); padding:56px 0 24px; font-size:0.88rem}
+.f-top{
+  max-width:var(--max); margin:0 auto; padding:0 var(--gutter);
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:36px;
+  margin-bottom:40px; padding-bottom:36px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+@media(max-width:880px){.f-top{grid-template-columns:1fr 1fr; gap:24px}}
 @media(max-width:540px){.f-top{grid-template-columns:1fr}}
-.f-brand .logo{color:#fff}
-.f-brand .logo-mark{background:var(--accent)}
-.f-brand p{margin-top:14px; max-width:340px; line-height:1.6}
-.f-top h5{color:#fff; font-family:var(--sans); font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px; font-weight:600}
+.f-brand .logo-img{filter:brightness(0) invert(1); height:28px}
+.f-brand p{margin-top:12px; max-width:300px; line-height:1.6}
+.f-top h5{color:#fff; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:12px; font-weight:600}
 .f-top ul{list-style:none}
-.f-top li{margin-bottom:8px}
-.f-top a{color:rgba(255,255,255,0.6); transition:color 0.2s}
+.f-top li{margin-bottom:7px}
+.f-top a{color:rgba(255,255,255,0.55); transition:color 0.2s}
 .f-top a:hover{color:var(--accent)}
-.f-bottom{max-width:var(--max); margin:0 auto; padding:0 var(--gutter); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.84rem}
+.f-bottom{
+  max-width:var(--max); margin:0 auto; padding:0 var(--gutter);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  font-size:0.78rem;
+}
 
 /* ============ MOBILE STICKY ============ */
-.m-sticky{display:none; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); padding:10px 14px; z-index:60; gap:8px; box-shadow:0 -8px 24px rgba(0,0,0,0.08)}
-.m-sticky .btn{flex:1; padding:13px; font-size:0.92rem; justify-content:center}
-@media(max-width:720px){.m-sticky{display:flex} body{padding-bottom:74px}}
+.m-sticky{display:none; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); padding:10px 14px; z-index:60; gap:8px; box-shadow:0 -6px 20px rgba(0,0,0,0.06)}
+.m-sticky .btn{flex:1; padding:12px; font-size:0.88rem; justify-content:center}
+@media(max-width:720px){.m-sticky{display:flex} body{padding-bottom:70px}}
 
-/* ============ FADE-IN ============ */
-.fade-up{opacity:0; transform:translateY(24px); transition:opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1)}
+/* ============ FADE ============ */
+.fade-up{opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease}
 .fade-up.visible{opacity:1; transform:translateY(0)}
-.fade-up.d1{transition-delay:0.1s}
-.fade-up.d2{transition-delay:0.2s}
-.fade-up.d3{transition-delay:0.3s}
+.fade-up.d1{transition-delay:0.08s}
+.fade-up.d2{transition-delay:0.16s}
+.fade-up.d3{transition-delay:0.24s}
 </style>
 </head>
 <body>
@@ -591,12 +455,12 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
   <div class="ticker-track">
     <span class="ticker-item">Festpreis-Garantie nach Vor-Ort-Termin</span>
     <span class="ticker-item">45 eigene Handwerker — keine Subunternehmer</span>
-    <span class="ticker-item">22 Jahre in der Region <span>Heidelberg / Mannheim / Heilbronn</span></span>
+    <span class="ticker-item">22 Jahre in der Region Heidelberg / Mannheim / Heilbronn</span>
     <span class="ticker-item">Kostenlose Beratung vor Ort</span>
     <span class="ticker-item">4,9 ★ aus 180+ Bewertungen</span>
     <span class="ticker-item">Festpreis-Garantie nach Vor-Ort-Termin</span>
     <span class="ticker-item">45 eigene Handwerker — keine Subunternehmer</span>
-    <span class="ticker-item">22 Jahre in der Region <span>Heidelberg / Mannheim / Heilbronn</span></span>
+    <span class="ticker-item">22 Jahre in der Region Heidelberg / Mannheim / Heilbronn</span>
     <span class="ticker-item">Kostenlose Beratung vor Ort</span>
     <span class="ticker-item">4,9 ★ aus 180+ Bewertungen</span>
   </div>
@@ -605,9 +469,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo">
-      <img src="img/HM_Logo.png" alt="HeinzelMänner" class="logo-img">
-    </a>
+    <a href="#" class="logo"><img src="img/HM Logo.svg" alt="HeinzelMänner" class="logo-img"></a>
     <div class="nav-links">
       <a href="#leistungen">Leistungen</a>
       <a href="#projekte">Referenzen</a>
@@ -629,25 +491,40 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section class="hero">
   <div class="hero-grid">
     <div>
-      <div class="hero-eyebrow fade-up visible"><span class="dot"></span><span>Sanierung &middot; Rhein-Neckar &middot; Heilbronn</span></div>
-      <h1 class="fade-up visible">Räume,<br><em>die bleiben.</em><br>Festpreis,<br><span class="accent italic">der hält.</span></h1>
-      <p class="hero-lede fade-up visible d1">Komplettsanierung &middot; Bad &middot; Boden &middot; Trockenbau &middot; Maler — <strong>alle Gewerke aus einer Hand.</strong> Ein Bauleiter, ein verbindlicher Festpreis, ein Endtermin.</p>
+      <div class="eyebrow fade-up visible">Sanierung · Rhein-Neckar · Heilbronn</div>
+      <h1 class="fade-up visible">Sanierung aus einer Hand. Festpreis, der hält.</h1>
+      <p class="hero-lede fade-up visible d1">Komplettsanierung, Bad, Boden, Trockenbau & Maler — <strong>alle Gewerke, ein Ansprechpartner.</strong> Verbindlicher Festpreis nach kostenloser Vor-Ort-Beratung.</p>
       <div class="hero-actions fade-up visible d2">
         <a href="#anfrage" class="btn btn-accent btn-lg">Kostenlose Beratung <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-        <a href="tel:+4962249689465" class="btn btn-outline btn-lg">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Jetzt anrufen
-        </a>
+        <a href="tel:+4962249689465" class="btn btn-outline btn-lg">06224 9689465</a>
       </div>
     </div>
     <div class="hero-visual fade-up visible d1">
       <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Modern saniertes Wohnzimmer">
-      <div class="hero-visual-caption">
-        <div>
-          <div class="vc-loc"><em>Wohnungssanierung</em></div>
-          <div class="vc-loc-sub">82 m² &middot; Heidelberg-Handschuhsheim &middot; Mai 2026</div>
+      <div class="hero-caption-tag">Aktuelle Projekte</div>
+      <div class="hero-caption">
+        <div class="hero-slide active" data-slide="0">
+          <div class="hs-title">Wohnungssanierung · 82 m²</div>
+          <div class="hs-sub">Heidelberg-Handschuhsheim · Mai 2026</div>
         </div>
-        <span class="vc-tag">Aktuelles Projekt</span>
+        <div class="hero-slide" data-slide="1">
+          <div class="hs-title">Badsanierung · Walk-in-Dusche</div>
+          <div class="hs-sub">Mannheim-Lindenhof · April 2026</div>
+        </div>
+        <div class="hero-slide" data-slide="2">
+          <div class="hs-title">Kernsanierung · 95 m² Altbau</div>
+          <div class="hs-sub">Heidelberg-Wieblingen · März 2026</div>
+        </div>
+        <div class="hero-slide" data-slide="3">
+          <div class="hs-title">Boden & Maler · 3-Zimmer</div>
+          <div class="hs-sub">Schwetzingen · Februar 2026</div>
+        </div>
+        <div class="hero-dots">
+          <span class="hero-dot active" data-dot="0"></span>
+          <span class="hero-dot" data-dot="1"></span>
+          <span class="hero-dot" data-dot="2"></span>
+          <span class="hero-dot" data-dot="3"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -657,16 +534,16 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section class="stats">
   <div class="stats-inner">
     <div class="stat fade-up">
-      <div class="num">22<em>+</em></div>
-      <div class="lbl">Jahre in der<br>Region verwurzelt</div>
+      <div class="num">22<span>+</span></div>
+      <div class="lbl">Jahre in der Region</div>
     </div>
     <div class="stat fade-up d1">
       <div class="num">45</div>
-      <div class="lbl">Eigene Handwerker,<br>keine Subs</div>
+      <div class="lbl">Eigene Handwerker</div>
     </div>
     <div class="stat fade-up d2">
-      <div class="num">430<em>+</em></div>
-      <div class="lbl">Abgeschlossene<br>Sanierungsprojekte</div>
+      <div class="num">430<span>+</span></div>
+      <div class="lbl">Abgeschlossene Projekte</div>
     </div>
   </div>
 </section>
@@ -674,217 +551,117 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <!-- LEISTUNGEN -->
 <section id="leistungen">
   <div class="wrap">
-    <div class="section-head fade-up">
-      <span class="eyebrow">Leistungen</span>
-      <h2>Fünf Gewerke,<br><em>ein Partner.</em></h2>
-      <p class="desc">Ob nur das Bad oder die komplette Wohnung — wir koordinieren sämtliche Gewerke und liefern ein einziges Festpreisangebot. Keine Schnittstellen, keine Verantwortungs-Spielchen.</p>
+    <div class="sh fade-up">
+      <div class="eyebrow">Unsere Leistungen</div>
+      <h2>Alle Gewerke aus einer Hand</h2>
+      <p>Ob Komplettsanierung, Bad oder Bodenverlegung — wir koordinieren alles und liefern einen verbindlichen Festpreis. Kein Subunternehmer-Chaos, ein Ansprechpartner.</p>
     </div>
 
-    <div class="services-list">
-      <a href="kern.html" class="svc fade-up">
-        <div class="svc-meta">
-          <span class="svc-tag">Komplett</span>
-          <h3>Kern&shy;sanierung</h3>
-          <p class="svc-desc">Wohnung, Haus oder Gewerbe komplett auf den Rohbau zurück und neu aufgebaut — Rückbau, Elektro, Sanitär, Boden, Maler. Alles aus einer Hand.</p>
-          <div class="svc-bottom">
-            <div class="svc-price">ab<strong>850 €/m²</strong></div>
-            <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-          </div>
+    <div class="svc-grid fade-up">
+      <a href="kern.html" class="svc-card">
+        <div class="svc-card-img"><img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kernsanierung"></div>
+        <div class="svc-card-body">
+          <h3>Komplettsanierung</h3>
+          <p>Wohnung oder Haus komplett auf den Rohbau zurück und neu aufgebaut — Rückbau, Elektro, Sanitär, Boden, Maler.</p>
+          <span class="svc-price-tag">ab 850 €/m²</span>
         </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Kernsanierung Wohnung"></div>
       </a>
-
-      <a href="bad.html" class="svc alt fade-up">
-        <div class="svc-meta">
-          <span class="svc-tag">Bad</span>
-          <h3>Bad&shy;sanierung</h3>
-          <p class="svc-desc">Komplettbäder, Walk-in-Duschen, barrierefreie Bäder. Sanitär, Fliesen, Elektrik, Boden und Trockenbau — fertig in 2–4 Wochen.</p>
-          <div class="svc-bottom">
-            <div class="svc-price">ab<strong>12.500 €</strong></div>
-            <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-          </div>
+      <a href="bad.html" class="svc-card">
+        <div class="svc-card-img"><img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Badsanierung"></div>
+        <div class="svc-card-body">
+          <h3>Badsanierung</h3>
+          <p>Komplettbäder, Walk-in-Duschen, barrierefreie Bäder. Sanitär, Fliesen, Elektrik — fertig in 2–4 Wochen.</p>
+          <span class="svc-price-tag">ab 12.500 €</span>
         </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Modernes Bad mit Dusche"></div>
       </a>
-
-      <a href="boden.html" class="svc fade-up">
-        <div class="svc-meta">
-          <span class="svc-tag">Boden</span>
-          <h3>Boden&shy;verlegung</h3>
-          <p class="svc-desc">Vinyl, Laminat, Designboden, Parkett oder Fliesen — inkl. Untergrund­vorbereitung, Verlegung und Sockelleisten. Bezugsfertig in 3–7 Tagen.</p>
-          <div class="svc-bottom">
-            <div class="svc-price">ab<strong>38 €/m²</strong></div>
-            <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-          </div>
+      <a href="boden.html" class="svc-card">
+        <div class="svc-card-img"><img src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bodenverlegung"></div>
+        <div class="svc-card-body">
+          <h3>Bodenverlegung</h3>
+          <p>Vinyl, Laminat, Parkett oder Fliesen — inkl. Untergrund, Verlegung und Sockelleisten. In 3–7 Tagen fertig.</p>
+          <span class="svc-price-tag">ab 38 €/m²</span>
         </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Holzboden modernes Wohnzimmer"></div>
-      </a>
-
-      <a href="trockenbau.html" class="svc alt fade-up">
-        <div class="svc-meta">
-          <span class="svc-tag">Trockenbau</span>
-          <h3>Trocken&shy;bau</h3>
-          <p class="svc-desc">Wände einziehen, Decken abhängen, Schallschutz, Räume neu schneiden. Sauber, staubarm und meist in 3–10 Werktagen fertig.</p>
-          <div class="svc-bottom">
-            <div class="svc-price">ab<strong>52 €/m²</strong></div>
-            <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-          </div>
-        </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Trockenbau Raumtrennung"></div>
-      </a>
-
-      <a href="maler.html" class="svc fade-up">
-        <div class="svc-meta">
-          <span class="svc-tag">Maler</span>
-          <h3>Maler&shy;arbeiten</h3>
-          <p class="svc-desc">Streichen, Tapezieren, Spachteln, Lackieren. Standard-Weiß oder Wunsch­farbe, sauber und schnell — auch nach Trockenbau oder Sanierung.</p>
-          <div class="svc-bottom">
-            <div class="svc-price">ab<strong>10 €/m²</strong></div>
-            <span class="svc-link">Mehr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-          </div>
-        </div>
-        <div class="svc-img"><img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Frisch gestrichener Raum"></div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- INLINE CTA 1 -->
+<!-- INLINE CTA -->
 <div class="inline-cta">
   <div class="inline-cta-inner">
-    <p>Welches Gewerk brauchen Sie? <em>Wir beraten kostenlos.</em></p>
+    <p>Welches Gewerk brauchen Sie? Wir beraten kostenlos.</p>
     <a href="#anfrage" class="btn">Beratung anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-    <a href="tel:+4962249689465" class="btn">06224 9689465</a>
+    <a href="tel:+4962249689465" class="btn btn-outline">06224 9689465</a>
   </div>
 </div>
 
-<!-- MARQUEE -->
-<div class="marquee">
-  <div class="marquee-track">
-    <span>Heidelberg <span class="italic"> · </span> Mannheim <span class="italic"> · </span> Schwetzingen <span class="italic"> · </span> Sinsheim <span class="italic"> · </span> Ludwigshafen <span class="italic"> · </span> Heilbronn <span class="italic"> · </span> Walldorf <span class="italic"> · </span> Leimen <span class="italic"> · </span> Weinheim <span class="italic"> · </span> Hockenheim</span>
-    <span>Heidelberg <span class="italic"> · </span> Mannheim <span class="italic"> · </span> Schwetzingen <span class="italic"> · </span> Sinsheim <span class="italic"> · </span> Ludwigshafen <span class="italic"> · </span> Heilbronn <span class="italic"> · </span> Walldorf <span class="italic"> · </span> Leimen <span class="italic"> · </span> Weinheim <span class="italic"> · </span> Hockenheim</span>
-  </div>
-</div>
-
-<!-- PROJECTS GALLERY -->
+<!-- PROJEKTE -->
 <section id="projekte">
   <div class="wrap">
-    <div class="section-head fade-up">
-      <span class="eyebrow">Referenzen</span>
-      <h2>Beispiel&shy;projekte<br>aus der <em>Region.</em></h2>
-      <p class="desc">Über 430 abgeschlossene Sanierungen in Heidelberg, Mannheim und im Raum Heilbronn. Hier einige unserer letzten Arbeiten.</p>
+    <div class="sh fade-up">
+      <div class="eyebrow">Referenzen</div>
+      <h2>Projekte aus der Region</h2>
+      <p>Über 430 abgeschlossene Sanierungen in Heidelberg, Mannheim und im Raum Heilbronn.</p>
     </div>
 
     <div class="proj-grid">
-      <div class="proj-card lg fade-up">
-        <img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Komplettsanierung Wohnung modern">
-        <div class="pmeta">
-          <span class="ptag">Kernsanierung</span>
-          <div class="pname"><em>Altbauwohnung 95 m²</em> · Heidelberg-Wieblingen</div>
-        </div>
+      <div class="proj-card wide fade-up">
+        <img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Komplettsanierung">
+        <div class="pmeta"><span class="ptag">Kernsanierung</span><div class="pname">Altbauwohnung 95 m² · Heidelberg</div></div>
       </div>
-      <div class="proj-card md fade-up">
-        <img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Modernes Badezimmer">
-        <div class="pmeta">
-          <span class="ptag">Bad</span>
-          <div class="pname"><em>Komplettbad 6 m²</em> · Heidelberg</div>
-        </div>
+      <div class="proj-card fade-up">
+        <img src="https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bad">
+        <div class="pmeta"><span class="ptag">Bad</span><div class="pname">Komplettbad · Heidelberg</div></div>
       </div>
-      <div class="proj-card md fade-up">
-        <img src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Wohnzimmer mit Designboden">
-        <div class="pmeta">
-          <span class="ptag">Boden &amp; Maler</span>
-          <div class="pname"><em>3-Zimmer-Wohnung</em> · Mannheim-Lindenhof</div>
-        </div>
+      <div class="proj-card fade-up">
+        <img src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Boden">
+        <div class="pmeta"><span class="ptag">Boden & Maler</span><div class="pname">3-Zimmer · Mannheim</div></div>
       </div>
-      <div class="proj-card md fade-up">
-        <img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Walk-in Dusche Bad">
-        <div class="pmeta">
-          <span class="ptag">Bad</span>
-          <div class="pname"><em>Walk-in-Dusche</em> · Sinsheim</div>
-        </div>
-      </div>
-      <div class="proj-card md fade-up">
-        <img src="https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Modernes Schlafzimmer">
-        <div class="pmeta">
-          <span class="ptag">Maler &amp; Boden</span>
-          <div class="pname"><em>Schlafzimmer komplett</em> · Ludwigshafen</div>
-        </div>
+      <div class="proj-card fade-up">
+        <img src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Walk-in Dusche">
+        <div class="pmeta"><span class="ptag">Bad</span><div class="pname">Walk-in-Dusche · Sinsheim</div></div>
       </div>
       <div class="proj-card wide fade-up">
-        <img src="https://images.pexels.com/photos/6587828/pexels-photo-6587828.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Moderne Küche">
-        <div class="pmeta">
-          <span class="ptag">Kernsanierung</span>
-          <div class="pname"><em>Küche &amp; Wohnbereich</em> · Schwetzingen</div>
-        </div>
+        <img src="https://images.pexels.com/photos/6587828/pexels-photo-6587828.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Küche">
+        <div class="pmeta"><span class="ptag">Kernsanierung</span><div class="pname">Küche & Wohnbereich · Schwetzingen</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INLINE CTA 2 -->
+<!-- INLINE CTA -->
 <div class="inline-cta">
   <div class="inline-cta-inner">
-    <p>Ähnliches Projekt <em>geplant?</em></p>
+    <p>Ähnliches Projekt geplant?</p>
     <a href="#anfrage" class="btn">Kostenloses Angebot anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
   </div>
 </div>
 
-<!-- WARUM HEINZELMÄNNER -->
+<!-- WARUM -->
 <section id="warum">
   <div class="wrap">
-    <div class="section-head fade-up">
-      <span class="eyebrow">Warum HeinzelMänner</span>
-      <h2>Vier Gründe,<br><em>die zählen.</em></h2>
-      <p class="desc">Was uns von anderen Sanierungs­firmen unterscheidet — und was Sie als Auftraggeber davon haben.</p>
+    <div class="sh fade-up">
+      <div class="eyebrow">Warum HeinzelMänner</div>
+      <h2>Was Sie von uns erwarten können</h2>
     </div>
 
     <div class="usp-grid">
-      <div class="usp-item fade-up">
-        <div>
-          <h4>Festpreis nach Vor-Ort-Termin</h4>
-          <p>Wir kommen, schauen, rechnen sauber durch — und nennen Ihnen einen verbindlichen Festpreis. Schriftlich. Keine nachträglichen Überraschungen, keine versteckten Positionen.</p>
-        </div>
+      <div class="usp-card fade-up">
+        <h4>Verbindlicher Festpreis</h4>
+        <p>Nach der Vor-Ort-Begehung erhalten Sie ein schriftliches Festpreisangebot. Keine Nachforderungen, keine versteckten Positionen.</p>
       </div>
-      <div class="usp-item fade-up">
-        <div>
-          <h4>Eigenes Handwerker-Team</h4>
-          <p>45 fest angestellte Mitarbeiter — Sanitär, Elektrik, Fliesen, Trockenbau, Boden, Maler. Keine wechselnden Subunternehmer, ein einziger Ansprechpartner für alles.</p>
-        </div>
+      <div class="usp-card fade-up d1">
+        <h4>Eigenes Handwerker-Team</h4>
+        <p>45 fest angestellte Mitarbeiter für Sanitär, Elektrik, Fliesen, Trockenbau, Boden und Maler. Ein Ansprechpartner für alles.</p>
       </div>
-      <div class="usp-item fade-up">
-        <div>
-          <h4>Persönliche Beratung vor Ort</h4>
-          <p>Kein anonymer Online-Kalkulator. Unser Bauleiter kommt zu Ihnen, schaut sich Substanz und Anschlüsse an, hört zu und berät ehrlich — kostenlos und unverbindlich.</p>
-        </div>
+      <div class="usp-card fade-up d2">
+        <h4>Persönliche Beratung vor Ort</h4>
+        <p>Unser Bauleiter kommt zu Ihnen, schaut sich Substanz und Anschlüsse an und berät ehrlich — kostenlos und unverbindlich.</p>
       </div>
-      <div class="usp-item fade-up">
-        <div>
-          <h4>Regional verwurzelt</h4>
-          <p>Seit über 22 Jahren in Leimen ansässig. Wir kennen die Region, die Behörden, die Hausverwaltungen, die typische Bausubstanz — kurze Wege, schnelle Termine.</p>
-        </div>
+      <div class="usp-card fade-up d3">
+        <h4>22 Jahre in der Region</h4>
+        <p>In Leimen ansässig, die Region, die Behörden und die typische Bausubstanz kennen wir. Kurze Wege, schnelle Termine.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURED PROJECT -->
-<section class="featured" id="projekt">
-  <div class="featured-grid">
-    <div class="fade-up">
-      <span class="eyebrow" style="color:rgba(255,255,255,0.5); margin-bottom:20px">Referenzprojekt</span>
-      <h2>Altbau&shy;wohnung,<br><em>komplett</em> neu gedacht.</h2>
-      <p class="featured-lede">Eine 95 m² Altbauwohnung von 1928 — kernsaniert, modernisiert, energetisch ertüchtigt. Vom Rückbau über Sanitär und Elektro bis zur Schlüsselübergabe in 8 Wochen.</p>
-      <div class="featured-facts">
-        <div class="featured-fact"><div class="lbl">Fläche</div><div class="val">95 m²</div></div>
-        <div class="featured-fact"><div class="lbl">Bauzeit</div><div class="val">8 Wochen</div></div>
-        <div class="featured-fact"><div class="lbl">Investition</div><div class="val">112.000 €</div></div>
-        <div class="featured-fact"><div class="lbl">Ort</div><div class="val">Heidelberg</div></div>
-      </div>
-      <a href="#anfrage" class="btn btn-light">Ähnliches Projekt anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-    </div>
-    <div class="featured-img fade-up d1">
-      <img src="https://images.pexels.com/photos/6587828/pexels-photo-6587828.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kernsanierte Altbauwohnung Heidelberg">
     </div>
   </div>
 </section>
@@ -892,18 +669,13 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <!-- PREISRECHNER -->
 <section class="calc-section" id="rechner">
   <div class="wrap">
-    <div class="section-head fade-up">
-      <span class="eyebrow">Preis-Indikator</span>
-      <h2>Was kostet<br><em>meine Sanierung?</em></h2>
-      <p class="desc">Geben Sie uns einen groben Rahmen — der Rechner zeigt Ihnen sofort eine Preisspanne auf Basis typischer Projekte. Den verbindlichen Festpreis erhalten Sie nach kostenloser Vor-Ort-Begehung.</p>
-    </div>
-
     <div class="calc-wrap">
       <div class="calc-intro fade-up">
-        <h2 style="font-size:1.8rem; max-width:none; margin-bottom:14px">So funktioniert's:</h2>
-        <p>Wählen Sie die gewünschte Leistung und geben Sie die Fläche an. Der Rechner zeigt Ihnen eine grobe Preisspanne basierend auf typischen Projekten der letzten 12 Monate in der Region.</p>
+        <div class="eyebrow">Preis-Indikator</div>
+        <h2 style="margin-bottom:14px">Was kostet meine Sanierung?</h2>
+        <p>Wählen Sie die Leistung und geben Sie die Fläche an. Der Rechner zeigt eine Preisspanne auf Basis typischer Projekte.</p>
         <div class="hint">
-          <strong>Wichtig:</strong> Der finale Preis hängt von Material­auswahl, Substanz und Ausführungs­details ab. Den exakten Festpreis erhalten Sie nach Vor-Ort-Termin — kostenlos und unverbindlich.
+          <strong>Wichtig:</strong> Der finale Preis hängt von Materialauswahl, Substanz und Details ab. Den exakten Festpreis gibt's nach dem kostenlosen Vor-Ort-Termin.
         </div>
       </div>
 
@@ -950,7 +722,7 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
         <div class="calc-result">
           <div class="l">Geschätzte Preisspanne (brutto)</div>
           <div class="r" id="calc-range">60.000 €<span class="sep">—</span>112.500 €</div>
-          <div class="d">Verbindlicher Festpreis nach kostenloser Vor-Ort-Begehung</div>
+          <div class="d">Verbindlicher Festpreis nach Vor-Ort-Begehung</div>
         </div>
 
         <a href="#anfrage" class="btn btn-block btn-lg">Genaues Angebot anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
@@ -959,142 +731,88 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
   </div>
 </section>
 
-<!-- PROCESS -->
+<!-- ABLAUF — visual steps -->
 <section id="ablauf">
   <div class="wrap">
-    <div class="section-head fade-up">
-      <span class="eyebrow">Ablauf</span>
-      <h2>Vier Schritte.<br><em>Ein Festpreis.</em></h2>
-      <p class="desc">Transparent, planbar, ohne Überraschungen. Vom ersten Telefonat bis zum übergebenen Projekt — Sie wissen jederzeit, wo wir stehen.</p>
+    <div class="sh fade-up" style="text-align:center; margin-left:auto; margin-right:auto">
+      <div class="eyebrow">So läuft's ab</div>
+      <h2>Vier Schritte zum Festpreis</h2>
     </div>
 
-    <div class="process-list">
-      <div class="process-row fade-up">
-        <span class="pno">01</span>
-        <div>
-          <h4>Anfrage</h4>
-          <p>Sie rufen an oder füllen das Formular aus. Wir melden uns binnen 24 Stunden zurück und vereinbaren einen Vor-Ort-Termin.</p>
-        </div>
-        <span class="pdur">Heute</span>
+    <div class="process-grid fade-up">
+      <div class="step">
+        <div class="step-num"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.12 4.18 2 2 0 0 1 5.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c1.21.34 2 .57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h4>Anfrage</h4>
+        <p>Anrufen oder Formular ausfüllen. Wir melden uns innerhalb von 24 Stunden.</p>
+        <div class="step-time">Heute</div>
       </div>
-      <div class="process-row fade-up">
-        <span class="pno">02</span>
-        <div>
-          <h4>Vor-Ort-Beratung</h4>
-          <p>Unser Bauleiter kommt zu Ihnen, schaut sich alles an, hört zu und berät — kostenlos und ohne Verkaufsdruck.</p>
-        </div>
-        <span class="pdur">In 48 h</span>
+      <div class="step">
+        <div class="step-num"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M9 22V12h6v10"/></svg></div>
+        <h4>Vor-Ort-Beratung</h4>
+        <p>Bauleiter kommt zu Ihnen, schaut alles an und berät — kostenlos, ohne Druck.</p>
+        <div class="step-time">In 48 Stunden</div>
       </div>
-      <div class="process-row fade-up">
-        <span class="pno">03</span>
-        <div>
-          <h4>Festpreis-Angebot</h4>
-          <p>Binnen 5 Werktagen erhalten Sie ein schriftliches Festpreis-Angebot — detailliert aufgeschlüsselt nach Gewerken.</p>
-        </div>
-        <span class="pdur">Nach 1 Woche</span>
+      <div class="step">
+        <div class="step-num"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+        <h4>Festpreis-Angebot</h4>
+        <p>Schriftliches Angebot, aufgeschlüsselt nach Gewerken. Verbindlich und transparent.</p>
+        <div class="step-time">Nach 1 Woche</div>
       </div>
-      <div class="process-row fade-up">
-        <span class="pno">04</span>
-        <div>
-          <h4>Ausführung &amp; Übergabe</h4>
-          <p>Wir starten zügig, ein fester Bauleiter koordiniert alle Gewerke. Wöchentliche Updates, pünktliche Übergabe.</p>
-        </div>
-        <span class="pdur">4–14 Wochen</span>
+      <div class="step">
+        <div class="step-num"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div>
+        <h4>Ausführung & Übergabe</h4>
+        <p>Ein Bauleiter koordiniert alle Gewerke. Wöchentliche Updates, pünktliche Übergabe.</p>
+        <div class="step-time">4–14 Wochen</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section id="preise" class="tight" style="background:var(--paper-2)">
+<section id="preise" style="background:var(--paper-2)">
   <div class="wrap">
-    <div class="section-head fade-up">
-      <span class="eyebrow">Festpreis-Übersicht</span>
-      <h2>Preise im<br><em>Überblick.</em></h2>
-      <p class="desc">Unsere Festpreise pro Leistung als Orientierung. Klicken Sie auf eine Position für die detaillierte Beschreibung mit allen enthaltenen Arbeiten.</p>
+    <div class="sh fade-up">
+      <div class="eyebrow">Festpreise</div>
+      <h2>Preise im Überblick</h2>
+      <p>Unsere Richtpreise als Orientierung. Den verbindlichen Festpreis erhalten Sie nach der kostenlosen Vor-Ort-Begehung.</p>
     </div>
 
     <div class="price-list">
-      <a href="kern.html" class="price-row fade-up">
-        <div class="price-name">Kernsanierung <em>· Komplett</em></div>
-        <div class="price-amt"><em>ab</em>850 €/m²</div>
-        <span class="price-link">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-      </a>
-      <a href="bad.html" class="price-row fade-up">
-        <div class="price-name">Badsanierung <em>· 5–7 m² komplett</em></div>
-        <div class="price-amt"><em>ab</em>12.500 €</div>
-        <span class="price-link">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-      </a>
-      <a href="boden.html" class="price-row fade-up">
-        <div class="price-name">Bodenverlegung <em>· Vinyl inkl. Material</em></div>
-        <div class="price-amt"><em>ab</em>42 €/m²</div>
-        <span class="price-link">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-      </a>
-      <a href="trockenbau.html" class="price-row fade-up">
-        <div class="price-name">Trockenbau <em>· doppelt beplankt + Dämmung</em></div>
-        <div class="price-amt"><em>ab</em>75 €/m²</div>
-        <span class="price-link">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-      </a>
-      <a href="maler.html" class="price-row fade-up">
-        <div class="price-name">Malerarbeiten <em>· Wände streichen</em></div>
-        <div class="price-amt"><em>ab</em>10 €/m²</div>
-        <span class="price-link">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-      </a>
+      <a href="kern.html" class="price-row fade-up"><div class="price-name">Kernsanierung <span>Komplett</span></div><div class="price-amt">ab 850 €/m²</div></a>
+      <a href="bad.html" class="price-row fade-up"><div class="price-name">Badsanierung <span>5–7 m² komplett</span></div><div class="price-amt">ab 12.500 €</div></a>
+      <a href="boden.html" class="price-row fade-up"><div class="price-name">Bodenverlegung <span>Vinyl inkl. Material</span></div><div class="price-amt">ab 42 €/m²</div></a>
+      <a href="trockenbau.html" class="price-row fade-up"><div class="price-name">Trockenbau <span>doppelt beplankt + Dämmung</span></div><div class="price-amt">ab 75 €/m²</div></a>
+      <a href="maler.html" class="price-row fade-up"><div class="price-name">Malerarbeiten <span>Wände streichen</span></div><div class="price-amt">ab 10 €/m²</div></a>
     </div>
   </div>
 </section>
 
-<!-- INLINE CTA 3 -->
+<!-- INLINE CTA -->
 <div class="inline-cta">
   <div class="inline-cta-inner">
-    <p>Jetzt <em>Festpreis sichern</em> — Beratung in 48 Stunden vor Ort.</p>
+    <p>Jetzt Festpreis sichern — Beratung in 48 Stunden vor Ort.</p>
     <a href="tel:+4962249689465" class="btn">06224 9689465</a>
-    <a href="#anfrage" class="btn">Formular ausfüllen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <a href="#anfrage" class="btn btn-outline">Formular ausfüllen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
   </div>
 </div>
 
 <!-- FAQ -->
 <section id="faq">
   <div class="wrap">
-    <div class="section-head fade-up">
-      <span class="eyebrow">Häufige Fragen</span>
-      <h2>Bevor Sie<br><em>anrufen.</em></h2>
-      <p class="desc">Die Fragen, die wir am häufigsten gestellt bekommen. Falls Ihre nicht dabei ist, rufen Sie uns einfach an — wir beantworten alles ehrlich und direkt.</p>
+    <div class="sh fade-up">
+      <div class="eyebrow">Häufige Fragen</div>
+      <h2>Bevor Sie anrufen</h2>
     </div>
 
     <div class="faq-list">
-      <details class="faq-item">
-        <summary>Was kostet eine Komplettsanierung?</summary>
-        <div class="ans">Als grobe Orientierung: bei einer Wohnungs-Komplettsanierung kalkulieren wir typischerweise 800–1.500 € pro m² Wohnfläche, je nach Substanz, Materialwahl und Ausstattung. Eine 80 m² Wohnung liegt also im Bereich 64.000–120.000 €. Den exakten Festpreis erhalten Sie nach unserer kostenlosen Vor-Ort-Begehung.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Wie schnell kann begonnen werden?</summary>
-        <div class="ans">Der Vor-Ort-Termin ist in der Regel binnen 48 Stunden möglich. Nach Auftragsannahme starten wir typischerweise innerhalb von 4–8 Wochen, je nach Projektgröße und Saison. Bei Notfällen (Wasserschaden, Bewohnbarkeit gefährdet) sind wir oft innerhalb einer Woche vor Ort.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Übernehmen Sie alle Gewerke selbst?</summary>
-        <div class="ans">Ja — Sanitär, Elektrik, Trockenbau, Boden, Maler, Fliesen und Entrümpelung machen wir mit unseren eigenen 45 Mitarbeitern. Nur bei sehr speziellen Anforderungen (z. B. Statiker, Schornsteinfeger-Abnahmen) arbeiten wir mit Partnern, die wir seit Jahren kennen und vertrauen.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Gibt es einen Festpreis oder Abrechnung nach Aufwand?</summary>
-        <div class="ans">Wir arbeiten ausschließlich mit Festpreisen, die wir nach der Vor-Ort-Begehung schriftlich anbieten. Dieser Preis ist verbindlich und gilt — auch wenn die Arbeit am Ende länger dauert als kalkuliert. Nur wenn Sie selbst nachträglich Änderungen wünschen, vereinbaren wir das gesondert.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Können wir während der Sanierung in der Wohnung wohnen?</summary>
-        <div class="ans">Das hängt vom Umfang ab. Bei einer Badsanierung oder reinen Malerarbeiten ist es oft möglich — Bad temporär unbenutzbar, Wohnen aber möglich. Bei einer Kernsanierung empfehlen wir den Auszug für 3–8 Wochen. Wir besprechen das im Vor-Ort-Termin ehrlich mit Ihnen.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Übernehmen Sie auch nur Teilleistungen?</summary>
-        <div class="ans">Selbstverständlich. Sie können bei uns einzelne Gewerke beauftragen — z. B. nur die Bodenverlegung, nur das Bad oder nur die Malerarbeiten. Wir sind genauso flexibel wie Sie. Auf den Unterseiten finden Sie zu jedem Gewerk Details.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Wie wickeln Sie Versicherungsschäden ab?</summary>
-        <div class="ans">Bei Wasser- oder Brandschäden übernehmen wir auf Wunsch die komplette Abwicklung mit Ihrer Gebäude- oder Hausratversicherung: Schadensaufnahme, Kostenvoranschlag im versicherungs­konformen Format, direkte Abrechnung. Sie müssen nicht selbst koordinieren.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Welche Förderungen gibt es?</summary>
-        <div class="ans">KfW 261/461 für energetische Sanierung (Dämmung, Fenster, Heizung) bis 75.000 € Kredit + 25 % Tilgungszuschuss. BAFA-Förderung für Heizungstausch bis 70 %. Für barrierefreien Umbau KfW 455-B (max. 6.250 €) und Pflegekasse (max. 4.180 €). Wir wickeln Antrag und Nachweise auf Wunsch komplett ab.</div>
-      </details>
+      <details class="faq-item"><summary>Was kostet eine Komplettsanierung?</summary><div class="ans">Typischerweise 800–1.500 € pro m² Wohnfläche, je nach Substanz, Materialwahl und Ausstattung. Eine 80 m² Wohnung liegt im Bereich 64.000–120.000 €. Den exakten Festpreis erhalten Sie nach der kostenlosen Vor-Ort-Begehung.</div></details>
+      <details class="faq-item"><summary>Wie schnell kann begonnen werden?</summary><div class="ans">Der Vor-Ort-Termin ist binnen 48 Stunden möglich. Nach Auftragsannahme starten wir in 4–8 Wochen, je nach Projektgröße. Bei Notfällen (Wasserschaden) oft innerhalb einer Woche.</div></details>
+      <details class="faq-item"><summary>Übernehmen Sie alle Gewerke selbst?</summary><div class="ans">Ja — Sanitär, Elektrik, Trockenbau, Boden, Maler, Fliesen und Entrümpelung machen wir mit unseren 45 Mitarbeitern. Nur bei speziellen Anforderungen (Statiker, Schornsteinfeger) arbeiten wir mit langjährigen Partnern.</div></details>
+      <details class="faq-item"><summary>Festpreis oder Abrechnung nach Aufwand?</summary><div class="ans">Ausschließlich Festpreise, schriftlich nach Vor-Ort-Begehung. Verbindlich — auch wenn die Arbeit länger dauert. Nur bei nachträglichen Änderungswünschen vereinbaren wir gesondert.</div></details>
+      <details class="faq-item"><summary>Können wir während der Sanierung wohnen bleiben?</summary><div class="ans">Bei Badsanierung oder Malerarbeiten oft möglich. Bei Kernsanierung empfehlen wir den Auszug für 3–8 Wochen. Das besprechen wir ehrlich im Vor-Ort-Termin.</div></details>
+      <details class="faq-item"><summary>Übernehmen Sie auch nur Teilleistungen?</summary><div class="ans">Selbstverständlich — einzelne Gewerke wie nur die Bodenverlegung oder nur die Malerarbeiten. Auf den Unterseiten finden Sie zu jedem Gewerk Details.</div></details>
+      <details class="faq-item"><summary>Wie wickeln Sie Versicherungsschäden ab?</summary><div class="ans">Bei Wasser- oder Brandschäden übernehmen wir die komplette Abwicklung mit Ihrer Versicherung: Schadensaufnahme, Kostenvoranschlag, direkte Abrechnung.</div></details>
+      <details class="faq-item"><summary>Welche Förderungen gibt es?</summary><div class="ans">KfW 261/461 für energetische Sanierung bis 75.000 € Kredit. BAFA für Heizungstausch bis 70 %. KfW 455-B für barrierefreien Umbau. Wir wickeln Antrag und Nachweise auf Wunsch komplett ab.</div></details>
     </div>
   </div>
 </section>
@@ -1103,32 +821,20 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <section class="lead-form" id="anfrage">
   <div class="lead-form-grid">
     <div class="lf-left fade-up">
-      <span class="eyebrow" style="margin-bottom:20px">Beratung</span>
-      <h2>Lassen Sie uns<br><em>kurz sprechen.</em></h2>
-      <p>10-Minuten-Telefonat — wir klären die wichtigsten Eckpunkte, vereinbaren den kostenlosen Vor-Ort-Termin und Sie haben binnen 2 Wochen Ihr Festpreis-Angebot.</p>
+      <div class="eyebrow">Beratung</div>
+      <h2>Lassen Sie uns kurz sprechen</h2>
+      <p>10-Minuten-Telefonat — wir klären die Eckpunkte, vereinbaren den Vor-Ort-Termin und Sie haben binnen 2 Wochen Ihr Festpreis-Angebot.</p>
       <div class="lf-facts">
-        <div class="lf-fact">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-          <div><strong>Antwort binnen 24 Stunden</strong><span>Spätestens am nächsten Werktag</span></div>
-        </div>
-        <div class="lf-fact">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-          <div><strong>Kostenlos &amp; unverbindlich</strong><span>Erst nach Auftragsannahme zahlen Sie</span></div>
-        </div>
-        <div class="lf-fact">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
-          <div><strong>Vor-Ort-Termin binnen 48 Stunden</strong><span>Bauleiter kommt zu Ihnen</span></div>
-        </div>
+        <div class="lf-fact"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><strong>Antwort binnen 24 Stunden</strong></div>
+        <div class="lf-fact"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><strong>Kostenlos & unverbindlich</strong></div>
+        <div class="lf-fact"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><strong>Vor-Ort-Termin in 48 Stunden</strong></div>
       </div>
     </div>
 
     <div class="fade-up d1">
       <form class="form" action="https://formspree.io/f/xwvawqrw" method="POST">
         <input type="hidden" name="_subject" value="Sanierung-Anfrage Landingpage">
-        <div class="form-head">
-          <h3>Beratung anfragen</h3>
-          <div class="sub">Wir melden uns binnen 24 Stunden</div>
-        </div>
+        <div class="form-head"><h3>Beratung anfragen</h3><div class="sub">Wir melden uns binnen 24 Stunden</div></div>
         <div class="field"><label>Ihr Name</label><input type="text" name="Name" required placeholder="Vor- und Nachname"></div>
         <div class="field-row">
           <div class="field"><label>Telefon</label><input type="tel" name="Telefon" required placeholder="0171 1234567"></div>
@@ -1137,44 +843,33 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
         <div class="field"><label>Welche Sanierung?</label>
           <select name="Sanierungsart" required>
             <option value="">Bitte auswählen…</option>
-            <option>Komplettsanierung</option>
-            <option>Badsanierung</option>
-            <option>Bodenverlegung</option>
-            <option>Trockenbau</option>
-            <option>Malerarbeiten</option>
-            <option>Mehrere Leistungen</option>
+            <option>Komplettsanierung</option><option>Badsanierung</option>
+            <option>Bodenverlegung</option><option>Trockenbau</option>
+            <option>Malerarbeiten</option><option>Mehrere Leistungen</option>
             <option>Beratung nötig</option>
           </select>
         </div>
         <div class="field"><label>Anmerkung (optional)</label><textarea name="Anmerkung" rows="2" placeholder="z. B. Wohnfläche, Wunschtermin"></textarea></div>
-        <button type="submit" class="btn btn-block btn-lg">Beratung anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
-        <div class="form-note">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Ihre Daten werden vertraulich behandelt.
-        </div>
+        <button type="submit" class="btn btn-accent btn-block btn-lg">Beratung anfragen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+        <div class="form-note">Ihre Daten werden vertraulich behandelt.</div>
       </form>
     </div>
   </div>
 </section>
 
-<!-- CTA (Dark) -->
+<!-- CTA -->
 <section class="cta">
   <div class="cta-inner">
     <div class="cta-grid">
-      <div class="fade-up">
-        <h2>Ihr Projekt.<br><em>Unser Handwerk.</em></h2>
-      </div>
+      <div class="fade-up"><h2>Ihr Projekt. Unser Handwerk.</h2></div>
       <div class="cta-right fade-up d1">
         <ul class="cta-points">
-          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Kostenlose Vor-Ort-Beratung binnen 48 Stunden</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Kostenlose Vor-Ort-Beratung in 48 Stunden</li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Verbindlicher Festpreis — keine Nachforderungen</li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 45 eigene Handwerker — keine Subunternehmer</li>
         </ul>
         <div class="cta-actions">
-          <a href="tel:+4962249689465" class="btn btn-accent btn-lg">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            06224 9689465
-          </a>
+          <a href="tel:+4962249689465" class="btn btn-accent btn-lg">06224 9689465</a>
           <a href="#anfrage" class="btn btn-light btn-lg">Formular ausfüllen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         </div>
       </div>
@@ -1186,36 +881,26 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 <footer>
   <div class="f-top">
     <div class="f-brand">
-      <a href="#" class="logo"><img src="img/HM_Logo.png" alt="HeinzelMänner" class="logo-img"></a>
-      <p>Sanierung &amp; Renovierung in der Metropolregion Rhein-Neckar und im Raum Heilbronn. Seit 22 Jahren — Festpreis garantiert.</p>
+      <a href="#" class="logo"><img src="img/HM Logo.svg" alt="HeinzelMänner" class="logo-img"></a>
+      <p>Sanierung & Renovierung in der Metropolregion Rhein-Neckar und im Raum Heilbronn. Seit 22 Jahren — Festpreis garantiert.</p>
     </div>
     <div>
       <h5>Leistungen</h5>
-      <ul>
-        <li><a href="bad.html">Badsanierung</a></li>
-        <li><a href="kern.html">Kernsanierung</a></li>
-        <li><a href="boden.html">Bodenverlegung</a></li>
-        <li><a href="trockenbau.html">Trockenbau</a></li>
-        <li><a href="maler.html">Malerarbeiten</a></li>
-      </ul>
+      <ul><li><a href="bad.html">Badsanierung</a></li><li><a href="kern.html">Kernsanierung</a></li><li><a href="boden.html">Bodenverlegung</a></li><li><a href="trockenbau.html">Trockenbau</a></li><li><a href="maler.html">Malerarbeiten</a></li></ul>
     </div>
     <div>
       <h5>Kontakt</h5>
       <p>HeinzelMänner GmbH<br>Im Hagen 4<br>69181 Leimen</p>
-      <p style="margin-top:12px"><a href="tel:+4962249689465" style="color:#fff">06224 9689465</a><br><a href="mailto:info@hm-sanierung.com">info@hm-sanierung.com</a></p>
+      <p style="margin-top:10px"><a href="tel:+4962249689465" style="color:#fff">06224 9689465</a><br><a href="mailto:info@hm-sanierung.com">info@hm-sanierung.com</a></p>
     </div>
     <div>
       <h5>Rechtliches</h5>
-      <ul>
-        <li><a href="../entruempelung/impressum.html">Impressum</a></li>
-        <li><a href="../entruempelung/datenschutz.html">Datenschutz</a></li>
-        <li><a href="../entruempelung/agb.html">AGB</a></li>
-      </ul>
+      <ul><li><a href="../entruempelung/impressum.html">Impressum</a></li><li><a href="../entruempelung/datenschutz.html">Datenschutz</a></li><li><a href="../entruempelung/agb.html">AGB</a></li></ul>
     </div>
   </div>
   <div class="f-bottom">
     <div>© 2026 HeinzelMänner Hausmeister Dienste und Gebäude Service GmbH</div>
-    <div>USt-IdNr. DE 192 272 349 &middot; Geschäftsführer Sascha Heck</div>
+    <div>USt-IdNr. DE 192 272 349 · Geschäftsführer Sascha Heck</div>
   </div>
 </footer>
 
@@ -1226,20 +911,30 @@ footer{background:var(--ink); color:rgba(255,255,255,0.6); padding:64px 0 28px; 
 </div>
 
 <script>
+// Nav scroll
 const nav = document.getElementById('nav');
-const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
-window.addEventListener('scroll', onScroll, {passive:true});
-onScroll();
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30), {passive:true});
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting){
-      e.target.classList.add('visible');
-      observer.unobserve(e.target);
-    }
-  });
-}, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+// Fade-up
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible'); obs.unobserve(e.target)} });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Hero caption cycling
+(function(){
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  if(!slides.length) return;
+  let cur = 0;
+  setInterval(() => {
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+  }, 5000);
+})();
 </script>
 
 </body>
